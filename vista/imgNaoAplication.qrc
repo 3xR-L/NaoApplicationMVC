@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="login">
+    <file>ojoAbierto</file>
+    <file>ojoCerrado</file>
+    <file>logo</file>
+  </qresource>
+</RCC>
