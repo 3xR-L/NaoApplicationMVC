@@ -60,8 +60,9 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         password = self.ui.tbPassword.text()
         self.ModeloUsuario = ModeloUsuario(usuario, password)
 
-        if (self.ConsultaUsuario.consultaUsuario(self.ModeloUsuario)):
+        if (self.ConsultaUsuario.consultarUsuario(self.ModeloUsuario)):
             print("Usuario Correcto")
+            self.ConsultaUsuario.cerrar()
         else:
             print("Usuario Incorrecto")
 

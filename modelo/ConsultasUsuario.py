@@ -4,10 +4,11 @@ from modelo.ModeloUsuario import ModeloUsuario
 
 
 class ConsultaUsuario(Conexion):
+
     def __init__(self):
         super().__init__()
 
-    def consultaUsuario(self, usuario: ModeloUsuario):
+    def consultarUsuario(self, usuario: ModeloUsuario):
         try:
             self.cursor.execute("SELECT * FROM usuarios WHERE nombreUsuario = '{}' and password ='{}'".format(
                 usuario.nombreUsuario, usuario.password))
@@ -19,5 +20,4 @@ class ConsultaUsuario(Conexion):
         except Exception as err:
             print("Error al consultar usuario: {}".format(err))
             return None
-        finally:
-            self.cerrar()
+
