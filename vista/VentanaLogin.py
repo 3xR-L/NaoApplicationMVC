@@ -121,12 +121,12 @@ class Ui_VentanaLogin(object):
 
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    VentanaLogin = QtWidgets.QDialog()
-    ui = Ui_VentanaLogin()
-    ui.setupUi(VentanaLogin)
-    VentanaLogin.show()
-    sys.exit(app.exec_())
+#if __name__ == "__main__":
+    #import sys
+    #app = QtWidgets.QApplication(sys.argv)
+    #VentanaLogin = QtWidgets.QDialog()
+    #ui = Ui_VentanaLogin()
+    #ui.setupUi(VentanaLogin)
+    #VentanaLogin.show()
+    #sys.exit(app.exec_())
 
