@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+cd# -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'ventanaCrearPaciente.ui'
 #

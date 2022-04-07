@@ -3,9 +3,10 @@
 from PyQt5 import QtWidgets
 import sys
 
-from modelo.ConsultasUsuario import ConsultaUsuario
-from modelo.ModeloUsuario import ModeloUsuario
+#from modelo.ConsultasUsuario import ConsultaUsuario
+#from modelo.ModeloUsuario import ModeloUsuario
 from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
+from vista.vistaSeleccionarPaciente import Ui_DialogTipoUsuario
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
@@ -21,7 +22,7 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         #self.inicializarGUI()
 
         #self.ModeloUsuario = ModeloUsuario()
-        self.ConsultaUsuario = ConsultaUsuario()
+       # self.ConsultaUsuario = ConsultaUsuario()
 
         #-----EVENTOS CLICK
         self.clicks()
@@ -38,7 +39,7 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContrasena)
         self.ui.btnOjoAbierto.clicked.connect(self.ocultarContrasena)
         # Checamos que el usuario este registrado si se pulsa el boton
-        self.ui.btnAceptar.clicked.connect(self.ingresar)
+        #self.ui.btnAceptar.clicked.connect(self.ingresar)
 
     def inicializarGUI(self):
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContraseña)

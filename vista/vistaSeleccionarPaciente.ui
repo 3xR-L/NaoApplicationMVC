@@ -118,7 +118,7 @@ font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
   </widget>
  </widget>
  <resources>
-  <include location="../Desktop/ProyectosPhyton/NaoAplicationMVC - copia/vista/imgNaoAplication.qrc"/>
+  <include location="../../../Desktop/ProyectosPhyton/NaoAplicationMVC - copia/vista/imgNaoAplication.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,5 +1,5 @@
 import mysql
-from conexiones.Conexion    import Conexion
+from conexiones.Conexion  import Conexion
 from modelo.ModeloUsuario import ModeloUsuario
 
 
