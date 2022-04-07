@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from vista import imgNaoAplication
 
 class Ui_DialogTipoUsuario(object):
     def setupUi(self, DialogTipoUsuario):
@@ -66,7 +66,7 @@ class Ui_DialogTipoUsuario(object):
         self.label_8.setText(_translate("DialogTipoUsuario", "Seleccione el tipo de usuario que desea crear"))
         self.btnCrearTerapeuta.setText(_translate("DialogTipoUsuario", "Crear terapeuta"))
         self.btnCrearPaciente.setText(_translate("DialogTipoUsuario", "Crear paciente"))
-import imgNaoAplication_rc
+#import imgNaoAplication_rc
 
 
 if __name__ == "__main__":

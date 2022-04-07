@@ -3,6 +3,7 @@
 from PyQt5 import QtWidgets
 import sys
 from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
+from vista.vistaCrearPaciente import Ui_DialogTipoUsuario
 from vista.VistaLoggin import ClaseVistaLogin
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
@@ -15,7 +16,8 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         #Le asignamos la vista a un objeto para manipularlo 
         self.ui = Ui_VentanaLogin()
         self.ui.setupUi(self)
-        #self.inicializarGUI()
+
+
 
         #-----EVENTOS CLICK
         self.clicks()
@@ -31,6 +33,8 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
     def clicks(self):
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContrasena)
         self.ui.btnOjoAbierto.clicked.connect(self.ocultarContrasena)
+        #Click para crear usuario
+        self.ui.btnCrear.clicked.connect(self.abrirVistaSeleccionarUsuario)
 
     def inicializarGUI(self):
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContraseña)
@@ -43,5 +47,13 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
     def mostrarContrasena(self):
         self.ui.btnOjoAbierto.setVisible(True)
         self.ui.btnOjoCerrado.setVisible(False)
+
+    def abrirVistaSeleccionarUsuario(self):
+        # Vista elegir usuario
+        self.ventana= QtWidgets.QMainWindow()
+        self.uiSeleccionarUsuario = Ui_DialogTipoUsuario()
+        self.uiSeleccionarUsuario.setupUi(self.ventana)
+        self.ventana.show()
+        self.close()
 
 
