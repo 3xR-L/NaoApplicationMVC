@@ -3,7 +3,7 @@
 from PyQt5 import QtWidgets
 import sys
 
-from modelo.ConsultasUsuario import ConsultaUsuario
+from modelo.Consultas import Consultas
 from modelo.ModeloUsuario import ModeloUsuario
 from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
 
@@ -21,7 +21,7 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         #self.inicializarGUI()
 
         #self.ModeloUsuario = ModeloUsuario()
-        self.ConsultaUsuario = ConsultaUsuario()
+        self.ConsultaUsuario = Consultas()
 
         #-----EVENTOS CLICK
         self.clicks()
