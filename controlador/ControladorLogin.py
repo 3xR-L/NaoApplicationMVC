@@ -3,7 +3,7 @@
 from PyQt5 import QtWidgets
 import sys
 
-from modelo.Consultas import Consultas
+from modelo.Consulta import Consulta
 from modelo.ModeloUsuario import ModeloUsuario
 from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
 
@@ -60,7 +60,7 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         password = self.ui.tbPassword.text()
         self.ModeloUsuario = ModeloUsuario(usuario, password)
 
-        if (self.ConsultaUsuario.consultarUsuario(self.ModeloUsuario)):
+        if (self.Consulta.consultarUsuario(self.ModeloUsuario)):
             print("Usuario Correcto")
             self.ConsultaUsuario.cerrar()
         else:
