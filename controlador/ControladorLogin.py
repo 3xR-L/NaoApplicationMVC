@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import uic
 
 #Para Mostrar el Login 
-class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
+class ControladorLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
 
     def __init__(self):
         super().__init__()
@@ -21,7 +21,7 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         #self.inicializarGUI()
 
         #self.ModeloUsuario = ModeloUsuario()
-        self.ConsultaUsuario = Consultas()
+        self.Consulta = Consulta()
 
         #-----EVENTOS CLICK
         self.clicks()
@@ -63,6 +63,9 @@ class ControladorVentanaLogin(QtWidgets.QMainWindow): #Hereda para poder usar va
         if (self.Consulta.consultarUsuario(self.ModeloUsuario)):
             print("Usuario Correcto")
             self.ConsultaUsuario.cerrar()
+            '''
+            Inicializar la ventana de la selección de ejercicios
+            '''
         else:
             print("Usuario Incorrecto")
 
