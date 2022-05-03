@@ -15,7 +15,7 @@ class Consultas(Conexion):
                 usuario.nombreUsuario, usuario.password))
             resultado = self.cursor.fetchall()
 
-            if len(resultado) > and usuario.tipo == 1:
+            if len(resultado) > 0 and usuario.tipo == 1:
                 return True
             else:
                 return False
