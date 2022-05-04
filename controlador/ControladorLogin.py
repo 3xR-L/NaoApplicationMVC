@@ -62,7 +62,6 @@ class ControladorLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
 
         if (self.Consulta.consultarUsuario(self.ModeloUsuario)):
             print("Usuario Correcto")
-            self.ConsultaUsuario.cerrar()
             '''
             Inicializar la ventana de la selección de ejercicios
             '''
