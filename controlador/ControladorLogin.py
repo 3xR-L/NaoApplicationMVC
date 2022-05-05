@@ -1,17 +1,14 @@
-#Abrimos la vemtana del Login 
-
+#Abrimos la vemtana del Login
 from PyQt5 import QtWidgets
-import sys
 
 from modelo.Consulta import Consulta
 from modelo.ModeloUsuario import ModeloUsuario
 from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
-
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5 import uic
+from PyQt5 import QtWidgets as qtw
+from controlador.ControladorCrearUsuario import ControladorCrearUsuario
 
 #Para Mostrar el Login 
-class ControladorLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
+class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidgets.QMainWindow
 
     def __init__(self):
         super().__init__()
@@ -19,9 +16,6 @@ class ControladorLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
         self.ui = Ui_VentanaLogin()
         self.ui.setupUi(self)
         #self.inicializarGUI()
-
-        #self.ModeloUsuario = ModeloUsuario()
-        self.Consulta = Consulta()
 
         #-----EVENTOS CLICK
         self.clicks()
@@ -32,13 +26,13 @@ class ControladorLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
         #Ocultamos la contraseña
         self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Password)
 
-
-
     def clicks(self):
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContrasena)
         self.ui.btnOjoAbierto.clicked.connect(self.ocultarContrasena)
         # Checamos que el usuario este registrado si se pulsa el boton
         self.ui.btnAceptar.clicked.connect(self.ingresar)
+        #Abrir la ventana para registrar usuarios
+        self.ui.btnCrear.clicked.connect(self.registrar)
 
     def inicializarGUI(self):
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContraseña)
@@ -55,6 +49,8 @@ class ControladorLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
         self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Normal)    #Mostramos la password
 
     def ingresar(self):
+        # self.ModeloUsuario = ModeloUsuario()
+        self.Consulta = Consulta()
         #Obtenemos los datos de la interfaz
         usuario = self.ui.tbNombre.text()
         password = self.ui.tbPassword.text()
@@ -67,3 +63,6 @@ class ControladorLogin(QtWidgets.QMainWindow): #Hereda para poder usar va window
             '''
         else:
             print("Usuario Incorrecto")
+
+    def registrar(self):
+        self.vcu = ControladorCrearUsuario()

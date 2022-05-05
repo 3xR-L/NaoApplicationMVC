@@ -16,7 +16,7 @@ class ModeloTerapeuta:
         self.localidad = localidad
         self.calle = calle
         self.num = num
-        self.nacionalidad = nacionalidad
+        self.nacionalidad = "NA"
         self.numero_contacto = numero_contacto
         self.correo_electronico = correo_electronico
         self.borradoLogico = 0
