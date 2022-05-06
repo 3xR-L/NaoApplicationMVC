@@ -34,12 +34,9 @@ class VistaCrearUsuario(qtw.QMainWindow):
             'Fecha de nacimiento*': qtw.QDateEdit(
                  self,
                  date=datetime.date.today(),
-                 time=datetime.time(12, 30),
                  calendarPopup=True,
-                 maximumDate=datetime.date(2020, 1, 1),
-                 minimumTime=datetime.time(8, 0),
-                 maximumTime=datetime.time(17, 0),
-                 displayFormat='yyyy-MM-dd HH:mm'
+                 maximumDate=datetime.date.today(),
+                 displayFormat='yyyy-MM-dd'
                  ),
             'Genero*': qtw.QComboBox(),
             'Dirección': qtw.QLineEdit(),
@@ -103,7 +100,7 @@ class VistaCrearUsuario(qtw.QMainWindow):
         #Set size of submit button
         self.submit.setFixedSize(170, 25)
         #Set size of cancel button
-        self.cancel.setFixedSize(225, 25)
+        self.cancel.setFixedSize(205, 25)
 
         # End main UI code
         self.show()
