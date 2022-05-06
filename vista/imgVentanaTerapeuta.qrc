@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="imgVentana">
+    <file>img1</file>
+    <file>tablero</file>
+    <file>img2</file>
+    <file>logo.png</file>
+  </qresource>
+</RCC>

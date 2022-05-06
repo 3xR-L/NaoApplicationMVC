@@ -6,6 +6,7 @@ from modelo.ModeloUsuario import ModeloUsuario
 from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
 from PyQt5 import QtWidgets as qtw
 from controlador.ControladorCrearUsuario import ControladorCrearUsuario
+from controlador.ControladorVentanaEjercicio import ControladorVentanaEjercicio
 
 #Para Mostrar el Login 
 class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidgets.QMainWindow
@@ -61,8 +62,14 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
             '''
             Inicializar la ventana de la selección de ejercicios
             '''
+            self.mostrarVentanaEjercicio()
+            self.close()
         else:
             print("Usuario Incorrecto")
 
     def registrar(self):
         self.vcu = ControladorCrearUsuario()
+
+    def mostrarVentanaEjercicio(self):
+        self.mve= ControladorVentanaEjercicio()
+
