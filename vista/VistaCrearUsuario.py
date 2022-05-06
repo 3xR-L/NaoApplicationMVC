@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtGui as qtg
 from PyQt5 import QtCore as qtc
+import datetime
 
 
 class VistaCrearUsuario(qtw.QMainWindow):
@@ -16,35 +17,67 @@ class VistaCrearUsuario(qtw.QMainWindow):
         self.setCentralWidget(cx_form)
         cx_form.setLayout(qtw.QFormLayout())
         heading = qtw.QLabel("Registro de Usuario")
+        heading.setStyleSheet("color: rgb(5, 33, 68);\nfont: 24pt \"MS Shell Dlg 2\";")
 
-        heading_font = qtg.QFont('MS Shell Dlg 2', 26, qtg.QFont.Bold)
-        heading.setFont(heading_font)
+        #Color the background of the window white
+        cx_form.setStyleSheet("background-color: rgb(255, 255, 255);")
+        #Set a fixed size for the window
+        self.setFixedSize(400, 400)
+        #Don't allow the user to resize the window
+        self.setFixedSize(self.size())
 
         cx_form.layout().addRow(heading)
-        inputs = {
-            'Nombre(s)': qtw.QLineEdit(),
-            'Apellido Paterno': qtw.QLineEdit(),
-            'Apellido Materno': qtw.QLineEdit(),
-            'Contraseña': qtw.QLineEdit(
+        self.inputs = {
+            'Nombre(s)*': qtw.QLineEdit(),
+            'Apellido paterno*': qtw.QLineEdit(),
+            'Apellido materno': qtw.QLineEdit(),
+            'Fecha de nacimiento*': qtw.QDateEdit(
+                 self,
+                 date=datetime.date.today(),
+                 time=datetime.time(12, 30),
+                 calendarPopup=True,
+                 maximumDate=datetime.date(2020, 1, 1),
+                 minimumTime=datetime.time(8, 0),
+                 maximumTime=datetime.time(17, 0),
+                 displayFormat='yyyy-MM-dd HH:mm'
+                 ),
+            'Genero*': qtw.QComboBox(),
+            'Dirección': qtw.QLineEdit(),
+            'Localidad': qtw.QLineEdit(),
+            'Tipo de usuario*': qtw.QCheckBox('Terapeuta', checked=True),
+            'Nombre de usuario*': qtw.QLineEdit(),
+            'Contraseña*': qtw.QLineEdit(
                 echoMode=qtw.QLineEdit.Password),
-            'Genero': qtw.QComboBox(),
-            'Terapeuta': qtw.QCheckBox('Checar si es terapeuta'),
+            'Confirmar contraseña*': qtw.QLineEdit(
+                echoMode=qtw.QLineEdit.Password)
         }
+
         generos = ('Masculino', 'Femenino')
 
-        inputs['Genero'].addItems(generos)
-        for label, widget in inputs.items():
+        self.inputs['Genero*'].addItems(generos)
+
+        for label, widget in self.inputs.items():
             cx_form.layout().addRow(label, widget)
 
         label_font = qtg.QFont()
         label_font.setFamily('MS Shell Dlg 2')
         label_font.setPointSize(12)
         label_font.setWeight(qtg.QFont.DemiBold)
-        for inp in inputs.values():
-            cx_form.layout().labelForField(inp).setFont(label_font)
+        for inp in self.inputs.values():
+            cx_form.layout().labelForField(inp).setStyleSheet("color: rgb(5, 33, 68);\nfont: 13pt \"MS Shell Dlg 2\";")
 
-        self.submit = qtw.QPushButton(
-            'Guardar')
+
+        # Set the maximum characters for the inputs
+        self.inputs['Nombre(s)*'].setMaxLength(30)
+        self.inputs['Apellido paterno*'].setMaxLength(25)
+        self.inputs['Apellido materno'].setMaxLength(25)
+        self.inputs['Nombre de usuario*'].setMaxLength(25)
+        self.inputs['Contraseña*'].setMaxLength(15)
+        self.inputs['Confirmar contraseña*'].setMaxLength(15)
+        self.inputs['Dirección'].setMaxLength(50)
+        self.inputs['Localidad'].setMaxLength(25)
+
+        self.submit = qtw.QPushButton('Guardar')
         self.cancel = qtw.QPushButton('Cancelar', clicked=self.close)
         cx_form.layout().addRow(self.submit, self.cancel)
 
@@ -55,7 +88,7 @@ class VistaCrearUsuario(qtw.QMainWindow):
             "background-color: rgb(7, 34, 64);\n"
             "color: rgb(255, 255, 255);\n"
             "border-radius: 8px;\n"
-            "font: 11pt \"MS Shell Dlg 2\";")
+            "font: 12pt \"MS Shell Dlg 2\";")
 
         self.cancel.setStyleSheet("\n"
             "border-style: solid;\n"
@@ -65,8 +98,12 @@ class VistaCrearUsuario(qtw.QMainWindow):
             "background-color: rgb(250, 124, 39);\n"
             "color: rgb(255, 255, 255);\n"
             "border-radius: 8px;\n"
-            "font: 11pt \"MS Shell Dlg 2\";")
+            "font: 12pt \"MS Shell Dlg 2\";")
+
+        #Set size of submit button
+        self.submit.setFixedSize(170, 25)
+        #Set size of cancel button
+        self.cancel.setFixedSize(225, 25)
 
         # End main UI code
         self.show()
-

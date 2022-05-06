@@ -49,7 +49,6 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
         self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Normal)    #Mostramos la password
 
     def ingresar(self):
-        # self.ModeloUsuario = ModeloUsuario()
         self.Consulta = Consulta()
         #Obtenemos los datos de la interfaz
         usuario = self.ui.tbNombre.text()

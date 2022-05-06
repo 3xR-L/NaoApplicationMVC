@@ -102,7 +102,7 @@ class Ui_VentanaLogin(object):
         self.tbNombre.raise_()
         self.label_3.raise_()
         self.tbPassword.raise_()
-        self.checkBoxRecordar.raise_()
+        #self.checkBoxRecordar.raise_()
         self.btnCrear.raise_()
         self.btnOjoAbierto.raise_()
         self.btnOjoCerrado.raise_()
@@ -114,7 +114,7 @@ class Ui_VentanaLogin(object):
         _translate = QtCore.QCoreApplication.translate
         VentanaLogin.setWindowTitle(_translate("VentanaLogin", "NaoAplication"))
         self.label_2.setText(_translate("VentanaLogin", "Nombre"))
-        self.label_4.setText(_translate("VentanaLogin", "Recordar contraseña"))
+        #self.label_4.setText(_translate("VentanaLogin", "Recordar contraseña"))
         self.btnAceptar.setText(_translate("VentanaLogin", "Aceptar"))
         self.label_3.setText(_translate("VentanaLogin", "Password"))
         self.btnCrear.setText(_translate("VentanaLogin", "Crear Usuario"))
