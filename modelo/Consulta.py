@@ -22,3 +22,20 @@ class Consulta(Conexion):
         except Exception as err:
             print("Error al consultar usuario: {}".format(err))
             return None
+
+    def consultarUsarioPorNombre(self, nombreUsuario):
+        try:
+            self.cursor.execute("SELECT * FROM usuarios WHERE nombreUsuario = '{}'".format(nombreUsuario))
+            resultado = self.cursor.fetchall()
+            if len(resultado) > 0:
+                return False
+            else:
+                return True
+        except Exception as err:
+            print("Error al consultar usuario: {}".format(err))
+            return False
+
+    def guardarUsuario(self, user: ModeloUsuario):
+        self.cursor.execute(
+            "INSERT INTO usuarios Values('{}', '{}', {})".format(user.nombreUsuario, user.password, user.tipo))
+        self.db.commit()
