@@ -64,10 +64,19 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
             self.mostrarVentanaEjercicio()
             self.close()
         else:
-            print("Usuario Incorrecto")
+            #Mostramos un mensaje de error en una ventana emergente
+            self.mostrarMensajeError()
 
     def registrar(self):
         self.vcu = ControladorCrearUsuario(1)
 
     def mostrarVentanaEjercicio(self):
         self.mve= ControladorVentanaEjercicio()
+
+    def mostrarMensajeError(self):
+        self.msg = qtw.QMessageBox()
+        self.msg.setIcon(qtw.QMessageBox.Warning)
+        self.msg.setText("Usuario o contraseña incorrectos")
+        self.msg.setWindowTitle("Error")
+        self.msg.setStandardButtons(qtw.QMessageBox.Ok)
+        self.msg.exec_()
