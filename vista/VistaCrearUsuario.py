@@ -22,7 +22,7 @@ class VistaCrearUsuario(qtw.QMainWindow):
         #Color the background of the window white
         cx_form.setStyleSheet("background-color: rgb(255, 255, 255);")
         #Set a fixed size for the window
-        self.setFixedSize(400, 460)
+        self.setFixedSize(380, 460)
         #Don't allow the user to resize the window
         self.setFixedSize(self.size())
 
@@ -100,9 +100,9 @@ class VistaCrearUsuario(qtw.QMainWindow):
             "font: 12pt \"MS Shell Dlg 2\";")
 
         #Set size of submit button
-        self.submit.setFixedSize(170, 25)
+        self.submit.setFixedSize(165, 25)
         #Set size of cancel button
-        self.cancel.setFixedSize(205, 25)
+        self.cancel.setFixedSize(190, 25)
 
         self.message = qtw.QLabel()
         self.message.setStyleSheet("color: rgb(5, 33, 68);\nfont: 10pt \"MS Shell Dlg 2\";")

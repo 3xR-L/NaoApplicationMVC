@@ -3,10 +3,9 @@
 class ModeloPatient:
     idPaciente=1
 
-    def __init__(self, nombre, ape_paterno, ape_materno, genero,
-                 fecha_nacimiento, cod_postal, localidad, calle, num, nacionalidad,
-                 diagnostico, numero_contacto, correo_electronico,
-                 Tutor_idTutor, Municipio_idMunicipio):
+    def __init__(self, nombre, ape_paterno, genero,
+                 fecha_nacimiento, numero_contacto, direccion='',
+                 localidad='', ape_materno=''):
         self.idPaciente = ModeloPatient.idPaciente
         ModeloPatient.idPaciente += 1
         self.nombre = nombre

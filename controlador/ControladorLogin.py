@@ -64,4 +64,4 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
             print("Usuario Incorrecto")
 
     def registrar(self):
-        self.vcu = ControladorCrearUsuario()
+        self.vcu = ControladorCrearUsuario(1)
