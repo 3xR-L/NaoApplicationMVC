@@ -22,7 +22,7 @@ class VistaCrearUsuario(qtw.QMainWindow):
         #Color the background of the window white
         cx_form.setStyleSheet("background-color: rgb(255, 255, 255);")
         #Set a fixed size for the window
-        self.setFixedSize(400, 400)
+        self.setFixedSize(380, 460)
         #Don't allow the user to resize the window
         self.setFixedSize(self.size())
 
@@ -34,17 +34,15 @@ class VistaCrearUsuario(qtw.QMainWindow):
             'Fecha de nacimiento*': qtw.QDateEdit(
                  self,
                  date=datetime.date.today(),
-                 time=datetime.time(12, 30),
                  calendarPopup=True,
-                 maximumDate=datetime.date(2020, 1, 1),
-                 minimumTime=datetime.time(8, 0),
-                 maximumTime=datetime.time(17, 0),
-                 displayFormat='yyyy-MM-dd HH:mm'
+                 maximumDate=datetime.date.today(),
+                 displayFormat='yyyy-MM-dd'
                  ),
-            'Genero*': qtw.QComboBox(),
+            'Género*': qtw.QComboBox(),
+            'Teléfono*': qtw.QLineEdit(),
             'Dirección': qtw.QLineEdit(),
             'Localidad': qtw.QLineEdit(),
-            'Tipo de usuario*': qtw.QCheckBox('Terapeuta', checked=True),
+            'Tipo de usuario*': qtw.QCheckBox('TERAPEUTA', checked=True),
             'Nombre de usuario*': qtw.QLineEdit(),
             'Contraseña*': qtw.QLineEdit(
                 echoMode=qtw.QLineEdit.Password),
@@ -54,7 +52,7 @@ class VistaCrearUsuario(qtw.QMainWindow):
 
         generos = ('Masculino', 'Femenino')
 
-        self.inputs['Genero*'].addItems(generos)
+        self.inputs['Género*'].addItems(generos)
 
         for label, widget in self.inputs.items():
             cx_form.layout().addRow(label, widget)
@@ -76,6 +74,7 @@ class VistaCrearUsuario(qtw.QMainWindow):
         self.inputs['Confirmar contraseña*'].setMaxLength(15)
         self.inputs['Dirección'].setMaxLength(50)
         self.inputs['Localidad'].setMaxLength(25)
+        self.inputs['Teléfono*'].setMaxLength(10)
 
         self.submit = qtw.QPushButton('Guardar')
         self.cancel = qtw.QPushButton('Cancelar', clicked=self.close)
@@ -101,9 +100,13 @@ class VistaCrearUsuario(qtw.QMainWindow):
             "font: 12pt \"MS Shell Dlg 2\";")
 
         #Set size of submit button
-        self.submit.setFixedSize(170, 25)
+        self.submit.setFixedSize(165, 25)
         #Set size of cancel button
-        self.cancel.setFixedSize(225, 25)
+        self.cancel.setFixedSize(190, 25)
 
+        self.message = qtw.QLabel()
+        self.message.setStyleSheet("color: rgb(5, 33, 68);\nfont: 10pt \"MS Shell Dlg 2\";")
+        cx_form.layout().addRow(self.message)
+        self.message.setAlignment(qtc.Qt.AlignCenter)
         # End main UI code
         self.show()

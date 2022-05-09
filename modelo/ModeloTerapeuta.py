@@ -1,27 +1,18 @@
 class ModeloTerapeuta:
-    idTerapeuta = 1
 
-    def __init__(self, idTerapeuta, nombre, ape_paterno, ape_materno, genero,
-                 fecha_nacimiento, cod_postal, localidad, calle, num,
-                 nacionalidad, numero_contacto, correo_electronico,
-                Municipio_idMunicipio, usuarios_nombreUsuario):
-        self.idTerapeuta = ModeloTerapeuta.idTerapeuta
-        ModeloTerapeuta.idTerapeuta += 1
+    def __init__(self, nombre, ape_paterno, genero,
+                 fecha_nacimiento, numero_contacto, direccion='',
+                 localidad='', ape_materno=''):
         self.nombre = nombre
         self.ape_paterno = ape_paterno
         self.ape_materno = ape_materno
         self.genero = genero
         self.fecha_nacimiento = fecha_nacimiento
-        self.cod_postal = cod_postal
         self.localidad = localidad
-        self.calle = calle
-        self.num = num
+        self.direccion = direccion
         self.nacionalidad = "NA"
         self.numero_contacto = numero_contacto
-        self.correo_electronico = correo_electronico
         self.borradoLogico = 0
-        self.Municipio_idMunicipio = Municipio_idMunicipio
-        self.usuarios_nombreUsuario = usuarios_nombreUsuario
 
     # Getters
     def getIdTerapeuta(self):

@@ -1,5 +1,6 @@
 from conexiones.Conexion import Conexion
 from modelo import ModeloUsuario
+from modelo.ModeloTerapeuta import ModeloTerapeuta
 
 
 class Consulta(Conexion):
@@ -22,3 +23,26 @@ class Consulta(Conexion):
         except Exception as err:
             print("Error al consultar usuario: {}".format(err))
             return None
+
+    def consultarUsarioPorNombre(self, nombreUsuario):
+        try:
+            self.cursor.execute("SELECT * FROM usuarios WHERE nombreUsuario = '{}'".format(nombreUsuario))
+            resultado = self.cursor.fetchall()
+            if len(resultado) > 0:
+                return False
+            else:
+                return True
+        except Exception as err:
+            print("Error al consultar usuario: {}".format(err))
+            return False
+
+    def guardarUsuario(self, user: ModeloUsuario, data: [ModeloTerapeuta, ModeloUsuario]):
+        self.cursor.execute(
+            "INSERT INTO usuarios Values('{}', '{}', {})".format(user.nombreUsuario, user.password, user.tipo))
+        self.cursor.execute(
+            "INSERT INTO terapeuta (nombre, ape_paterno, ape_materno, genero, fecha_nacimiento, localidad, calle,"
+            "numero_contacto, borradoLogico, usuarios_nombreUsuario) Values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(data.nombre,
+            data.ape_paterno, data.ape_materno, data.genero, data.fecha_nacimiento, data.localidad, data.direccion, data.numero_contacto,
+            user.tipo, user.nombreUsuario)
+        )
+        self.db.commit()
