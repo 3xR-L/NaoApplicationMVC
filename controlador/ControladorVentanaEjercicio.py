@@ -6,7 +6,7 @@ from PyQt5 import uic,QtWidgets
 
 from vista.VentajaEjercicio import Ui_VentanaEjercicio
 from controlador.ControladorVentanaTablero import ControladorVentanaTablero
-
+from controlador.ControladorVentanaBuscar import ControladorVentanaBuscar
 
 from PyQt5 import QtWidgets as qtw
 
@@ -24,10 +24,10 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
 
     def clicks(self):
         self.vista.btnIniciar.clicked.connect(self.abrirVentanaTablero)
-        print("Entra a los clicks")
-    def abrirVentanaTablero(self):
+        self.vista.btnBuscar.clicked.connect(self.abrirVentanaBuscar)
 
-        print("Entra a Abrin Vt")
+    def abrirVentanaTablero(self):
         self.cvt = ControladorVentanaTablero()
 
-
+    def abrirVentanaBuscar(self):
+        self.cvb = ControladorVentanaBuscar()

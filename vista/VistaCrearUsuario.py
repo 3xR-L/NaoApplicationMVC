@@ -6,13 +6,16 @@ import datetime
 
 class VistaCrearUsuario(qtw.QMainWindow):
 
-    def __init__(self):
+    def __init__(self, mode=0):
         """MainWindow constructor"""
         super().__init__()
         # Main UI code goes here
         #Set window as modal
         self.setWindowModality(qtc.Qt.ApplicationModal)
-        self.setWindowTitle('Registro de Usuario')
+        if mode == 0:
+            self.setWindowTitle('Registro de Usuario')
+        elif mode == 1:
+            self.setWindowTitle('Modificar Usuario')
         cx_form = qtw.QWidget()
         self.setCentralWidget(cx_form)
         cx_form.setLayout(qtw.QFormLayout())

@@ -1,7 +1,7 @@
 #Abrimos la vemtana del Login
 from PyQt5 import QtWidgets
 
-from modelo.Consulta import Consulta
+from modelo.CrudUsuario import CrudUsuario
 from modelo.ModeloUsuario import ModeloUsuario
 from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
 from PyQt5 import QtWidgets as qtw
@@ -50,14 +50,13 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
         self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Normal)    #Mostramos la password
 
     def ingresar(self):
-        self.Consulta = Consulta()
+        self.Consulta = CrudUsuario()
         #Obtenemos los datos de la interfaz
         usuario = self.ui.tbNombre.text()
         password = self.ui.tbPassword.text()
         self.ModeloUsuario = ModeloUsuario(usuario, password)
 
         if (self.Consulta.consultarUsuario(self.ModeloUsuario)):
-            print("Usuario Correcto")
             '''
             Inicializar la ventana de la selección de ejercicios
             '''
@@ -68,7 +67,7 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
             self.mostrarMensajeError()
 
     def registrar(self):
-        self.vcu = ControladorCrearUsuario(1)
+        self.vcu = ControladorCrearUsuario(0)
 
     def mostrarVentanaEjercicio(self):
         self.mve= ControladorVentanaEjercicio()
