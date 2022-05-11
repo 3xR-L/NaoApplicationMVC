@@ -72,6 +72,7 @@ class CrudUsuario(Conexion):
                     "SELECT * FROM paciente WHERE idPaciente = '{}'".format(
                         idOnly[0]))
                 self.lista_pacientes = self.lista_pacientes + self.cursor.fetchall()
+
             return self.lista_pacientes
         except Exception as err:
             print("Error al consultar pacientes: {}".format(err))

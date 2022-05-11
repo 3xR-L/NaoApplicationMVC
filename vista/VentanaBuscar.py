@@ -16,7 +16,7 @@ class VentanaBuscar(qtw.QMainWindow):
         heading.setAlignment(qtc.Qt.AlignCenter)
         cx_form.setStyleSheet("background-color: rgb(255, 255, 255);")
         #set a minimum size for the window
-        self.setMinimumSize(qtc.QSize(1200, 500))
+        self.setMinimumSize(qtc.QSize(1300, 500))
         cx_form.layout().addRow(heading)
 
         self.table = qtw.QTableWidget()
@@ -24,7 +24,9 @@ class VentanaBuscar(qtw.QMainWindow):
         self.table.setColumnCount(8)
         self.table.setHorizontalHeaderLabels(["Nombre", "Apellido Paterno", "Apellido Materno", "Género", "Fecha de Nacimiento", "Localidad", "Dirección",\
                 "No. de Contacto"])
+        # enable table modification
         self.table.setEditTriggers(qtw.QAbstractItemView.NoEditTriggers)
+        #self.table.setEditTriggers(qtw.QAbstractItemView.NoEditTriggers)
         self.table.setSelectionBehavior(qtw.QAbstractItemView.SelectRows)
         self.table.setSelectionMode(qtw.QAbstractItemView.SingleSelection)
         self.table.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -34,7 +36,7 @@ class VentanaBuscar(qtw.QMainWindow):
         self.table.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";")
         #set the width of the columns to fit the content
         self.table.horizontalHeader().setSectionResizeMode(qtw.QHeaderView.Stretch)
-        #add the table to the window
+        self.table.setSortingEnabled(True)
         cx_form.layout().addRow(self.table)
 
         #add the buttons to the window
@@ -91,6 +93,6 @@ class VentanaBuscar(qtw.QMainWindow):
         cx_form.layout().addRow(group_buttons)
 
         #open window in minum size
-        self.setMinimumSize(1200, 500)
+        self.setMinimumSize(1300, 500)
 
         self.show()
