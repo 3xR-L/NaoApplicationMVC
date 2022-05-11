@@ -9,7 +9,7 @@ from controlador.ControladorVentanaTablero import ControladorVentanaTablero
 
 
 from PyQt5 import QtWidgets as qtw
-
+from modelo.ClaseCronometro import Cronometro
 class ControladorVentanaEjercicio(qtw.QMainWindow):
     def __init__(self):
         ##Originaslemte no tenpia esto
@@ -23,7 +23,11 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
 
 
     def clicks(self):
+        #Abre la ventana
         self.vista.btnIniciar.clicked.connect(self.abrirVentanaTablero)
+        #Detiene el ejercicio
+        self.vista.btnDetener.clicked.connect(self.detener)
+
         print("Entra a los clicks")
     def abrirVentanaTablero(self):
 
@@ -31,3 +35,7 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.cvt = ControladorVentanaTablero()
 
 
+    def detener(self):
+        #Bansdera = falso
+        self.cvt.bandera=False
+        self.cvt.cerrar()
