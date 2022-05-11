@@ -27,18 +27,6 @@ class Ui_VentanaTablero(object):
 "")
         self.labelRobot.setText("")
         self.labelRobot.setObjectName("labelRobot")
-        self.btnMover = QtWidgets.QPushButton(VentanaTablero)
-        self.btnMover.setGeometry(QtCore.QRect(590, 40, 61, 31))
-        self.btnMover.setMouseTracking(False)
-        self.btnMover.setStyleSheet("\n"
-"border-style: solid;\n"
-"border-width: 1px;\n"
-"border-color: rgb(0, 51, 102);\n"
-"background-color: rgb(7, 34, 64);\n"
-"color: rgb(255, 255, 255);\n"
-"border-radius: 8px;\n"
-"font: 11pt \"MS Shell Dlg 2\";")
-        self.btnMover.setObjectName("btnMover")
 
         self.retranslateUi(VentanaTablero)
         QtCore.QMetaObject.connectSlotsByName(VentanaTablero)
@@ -46,7 +34,6 @@ class Ui_VentanaTablero(object):
     def retranslateUi(self, VentanaTablero):
         _translate = QtCore.QCoreApplication.translate
         VentanaTablero.setWindowTitle(_translate("VentanaTablero", "Dialog"))
-        self.btnMover.setText(_translate("VentanaTablero", "Mover"))
 
 
 

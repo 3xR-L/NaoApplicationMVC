@@ -5,6 +5,7 @@ import sys
 from PyQt5 import QtWidgets
 from controlador.ControladorLogin import ControladorLogin
 
+
 #Crear main 
 #mandar llamar la ventana del login 
 
