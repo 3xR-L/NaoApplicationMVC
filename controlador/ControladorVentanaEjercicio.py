@@ -11,9 +11,10 @@ from controlador.ControladorVentanaBuscar import ControladorVentanaBuscar
 from PyQt5 import QtWidgets as qtw
 
 class ControladorVentanaEjercicio(qtw.QMainWindow):
-    def __init__(self):
+    def __init__(self, id):
         ##Originaslemte no tenpia esto
         super().__init__()
+        self.idTerapeuta = id
         self.ventana= QtWidgets.QMainWindow()
         self.vista = Ui_VentanaEjercicio()
         self.vista.setupUi(self.ventana)
@@ -30,4 +31,4 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.cvt = ControladorVentanaTablero()
 
     def abrirVentanaBuscar(self):
-        self.cvb = ControladorVentanaBuscar()
+        self.cvb = ControladorVentanaBuscar(self.idTerapeuta)

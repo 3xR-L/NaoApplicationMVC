@@ -7,24 +7,23 @@ class VentanaBuscar(qtw.QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowModality(qtc.Qt.ApplicationModal)
-        self.setWindowTitle("Buscar")
+        self.setWindowTitle("Administrar Pacientes")
         cx_form = qtw.QWidget()
         self.setCentralWidget(cx_form)
         cx_form.setLayout(qtw.QFormLayout())
-        heading = qtw.QLabel("Administración de Usuarios")
+        heading = qtw.QLabel("Administración de Pacientes")
         heading.setStyleSheet("color: rgb(5, 33, 68);\nfont: 24pt \"MS Shell Dlg 2\";")
         heading.setAlignment(qtc.Qt.AlignCenter)
         cx_form.setStyleSheet("background-color: rgb(255, 255, 255);")
-        #set a maximum size for the window
-        self.setMaximumSize(qtc.QSize(1000, 800))
         #set a minimum size for the window
-        self.setMinimumSize(qtc.QSize(500, 500))
+        self.setMinimumSize(qtc.QSize(1200, 500))
         cx_form.layout().addRow(heading)
 
         self.table = qtw.QTableWidget()
         self.table.setRowCount(0)
-        self.table.setColumnCount(4)
-        self.table.setHorizontalHeaderLabels(["Nombre", "Apellido", "Usuario", "Contraseña"])
+        self.table.setColumnCount(8)
+        self.table.setHorizontalHeaderLabels(["Nombre", "Apellido Paterno", "Apellido Materno", "Género", "Fecha de Nacimiento", "Localidad", "Dirección",\
+                "No. de Contacto"])
         self.table.setEditTriggers(qtw.QAbstractItemView.NoEditTriggers)
         self.table.setSelectionBehavior(qtw.QAbstractItemView.SelectRows)
         self.table.setSelectionMode(qtw.QAbstractItemView.SingleSelection)
@@ -32,8 +31,9 @@ class VentanaBuscar(qtw.QMainWindow):
         self.table.setShowGrid(False)
         self.table.setStyleSheet("selection-background-color: rgb(5, 33, 68);")
         self.table.setStyleSheet("selection-color: rgb(255, 255, 255);")
-        self.table.setStyleSheet("font: 12pt \"MS Shell Dlg 2\";")
-
+        self.table.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";")
+        #set the width of the columns to fit the content
+        self.table.horizontalHeader().setSectionResizeMode(qtw.QHeaderView.Stretch)
         #add the table to the window
         cx_form.layout().addRow(self.table)
 
@@ -54,13 +54,43 @@ class VentanaBuscar(qtw.QMainWindow):
         self.btn_close.setStyleSheet("background-color: rgb(5, 33, 68);\ncolor: rgb(255, 255, 255);")
         self.btn_close.setFont(qtg.QFont("MS Shell Dlg 2", 12))
 
+        # add a search label, line edit and a button in the same row centered
+        search_group = qtw.QGroupBox()
+        self.le_search = qtw.QLineEdit()
+        self.le_search.setFont(qtg.QFont("MS Shell Dlg 2", 12))
+        self.le_search.setStyleSheet("color: rgb(5, 33, 68);")
+        self.le_search.setPlaceholderText("Buscar")
+        # set a maximum length for the line edit
+        self.le_search.setMaxLength(30)
+        self.le_search.setFixedWidth(300)
+        self.le_search.setFixedHeight(30)
+        self.btn_search = qtw.QPushButton("Buscar")
+        self.btn_search.setStyleSheet("background-color: rgb(5, 33, 68);\ncolor: rgb(255, 255, 255);")
+        self.btn_search.setFont(qtg.QFont("MS Shell Dlg 2", 12))
+        self.btn_search.setFixedWidth(100)
+        self.btn_search.setFixedHeight(30)
+        search_group.setLayout(qtw.QHBoxLayout())
+        # set size of the group box to fit the content
+        search_group.setFixedSize(400, 50)
+        #search_group.layout().addWidget(self.le_search, qtc.Qt.AlignCenter)
+        #search_group.layout().addWidget(self.btn_search, qtc.Qt.AlignCenter)
+        # add the line edit and the button to the layout in the same row centered
+        search_group.layout().addWidget(self.le_search, qtc.Qt.AlignCenter)
+        search_group.layout().addWidget(self.btn_search)
+
+        #add the search group to the window centered
+
         #add the buttons in the same row to the window
-        gropu_buttons = qtw.QWidget()
-        gropu_buttons.setLayout(qtw.QHBoxLayout())
-        gropu_buttons.layout().addWidget(self.btn_add)
-        gropu_buttons.layout().addWidget(self.btn_edit)
-        gropu_buttons.layout().addWidget(self.btn_delete)
-        gropu_buttons.layout().addWidget(self.btn_close)
-        cx_form.layout().addRow(gropu_buttons)
+        group_buttons = qtw.QWidget()
+        group_buttons.setLayout(qtw.QHBoxLayout())
+        group_buttons.layout().addWidget(search_group)
+        group_buttons.layout().addWidget(self.btn_add)
+        group_buttons.layout().addWidget(self.btn_edit)
+        group_buttons.layout().addWidget(self.btn_delete)
+        group_buttons.layout().addWidget(self.btn_close)
+        cx_form.layout().addRow(group_buttons)
+
+        #open window in minum size
+        self.setMinimumSize(1200, 500)
 
         self.show()

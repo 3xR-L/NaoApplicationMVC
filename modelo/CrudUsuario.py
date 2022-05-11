@@ -16,18 +16,22 @@ class CrudUsuario(Conexion):
                 usuario.nombreUsuario, usuario.password))
             resultado = self.cursor.fetchall()
             if len(resultado) > 0 and resultado[0][2] == '1':
-                return True
+                self.cursor.execute(
+                    "SELECT idTerapeuta FROM terapeuta WHERE usuarios_nombreUsuario = '{}'".format(resultado[0][0]))
+                id = self.cursor.fetchall()
+                return id[0][0]
             else:
-                return False
+                return 0
 
         except Exception as err:
             print("Error al consultar usuario: {}".format(err))
-            return None
+            return 0
 
     def consultarUsarioPorNombre(self, nombreUsuario):
         try:
             self.cursor.execute("SELECT * FROM usuarios WHERE nombreUsuario = '{}'".format(nombreUsuario))
             resultado = self.cursor.fetchall()
+
             if len(resultado) > 0:
                 return False
             else:
@@ -57,3 +61,18 @@ class CrudUsuario(Conexion):
                 data.ape_paterno, data.ape_materno, data.genero, data.fecha_nacimiento, data.localidad, data.direccion, data.numero_contacto)
             )
         self.db.commit()
+
+    def consultarPacientesAsociados(self, id: int):
+        try:
+            self.cursor.execute("SELECT paciente_idPaciente FROM terapeuta_has_paciente WHERE terapeuta_idTerapeuta = '{}'".format(id))
+            id_pacientes = self.cursor.fetchall()
+            self.lista_pacientes = ()
+            for idOnly in id_pacientes:
+                self.cursor.execute(
+                    "SELECT * FROM paciente WHERE idPaciente = '{}'".format(
+                        idOnly[0]))
+                self.lista_pacientes = self.lista_pacientes + self.cursor.fetchall()
+            return self.lista_pacientes
+        except Exception as err:
+            print("Error al consultar pacientes: {}".format(err))
+            return self.lista_pacientes

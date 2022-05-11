@@ -55,12 +55,10 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
         usuario = self.ui.tbNombre.text()
         password = self.ui.tbPassword.text()
         self.ModeloUsuario = ModeloUsuario(usuario, password)
+        self.idTerapeuta = self.Consulta.consultarUsuario(self.ModeloUsuario)
 
-        if (self.Consulta.consultarUsuario(self.ModeloUsuario)):
-            '''
-            Inicializar la ventana de la selección de ejercicios
-            '''
-            self.mostrarVentanaEjercicio()
+        if self.idTerapeuta > 0:
+            self.mostrarVentanaEjercicio(self.idTerapeuta)
             self.close()
         else:
             #Mostramos un mensaje de error en una ventana emergente
@@ -69,8 +67,8 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
     def registrar(self):
         self.vcu = ControladorCrearUsuario(0)
 
-    def mostrarVentanaEjercicio(self):
-        self.mve= ControladorVentanaEjercicio()
+    def mostrarVentanaEjercicio(self, id):
+        self.mve= ControladorVentanaEjercicio(id)
 
     def mostrarMensajeError(self):
         self.msg = qtw.QMessageBox()
