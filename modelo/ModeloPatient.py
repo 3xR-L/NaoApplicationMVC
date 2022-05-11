@@ -1,29 +1,20 @@
 
 
 class ModeloPatient:
-    idPaciente=1
 
     def __init__(self, nombre, ape_paterno, genero,
                  fecha_nacimiento, numero_contacto, direccion='',
                  localidad='', ape_materno=''):
-        self.idPaciente = ModeloPatient.idPaciente
-        ModeloPatient.idPaciente += 1
         self.nombre = nombre
         self.ape_paterno = ape_paterno
         self.ape_materno = ape_materno
         self.genero = genero
         self.fecha_nacimiento = fecha_nacimiento
-        self.cod_postal = cod_postal
         self.localidad = localidad
-        self.calle = calle
-        self.num = num
-        self.nacionalidad = nacionalidad
-        self.diagnostico = diagnostico
+        self.direccion = direccion
+        self.diagnostico = ''
         self.numero_contacto = numero_contacto
-        self.correo_electronico = correo_electronico
-        self.borradoLogico = 0
-        self.Tutor_idTutor = Tutor_idTutor
-        self.Municipio_idMunicipio = Municipio_idMunicipio
+        self.Tutor_idTutor = 0
 
     # Getters
     def getIdPaciente(self):
