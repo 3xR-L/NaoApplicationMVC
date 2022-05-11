@@ -7,8 +7,8 @@ class Conexion:
     def __init__(self):
         self.__host = "localhost"
         self.__user = "root"
-        self.__password = ""
-        self.__database = "dump20220330"
+        self.__password = "maestria"
+        self.__database = "cognidroneeg"
         self.__port = 3306
         self.db = self.conectar()
         self.cursor = self.db.cursor()
