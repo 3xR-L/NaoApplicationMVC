@@ -11,15 +11,17 @@ class VistaCrearUsuario(qtw.QMainWindow):
         super().__init__()
         # Main UI code goes here
         #Set window as modal
+        self.mode = mode
         self.setWindowModality(qtc.Qt.ApplicationModal)
-        if mode == 0:
+        if self.mode == 0:
             self.setWindowTitle('Registro de Usuario')
-        elif mode == 1:
+            heading = qtw.QLabel("Registro de Usuario")
+        else:
             self.setWindowTitle('Modificar Usuario')
+            heading = qtw.QLabel("Modificar Perfil")
         cx_form = qtw.QWidget()
         self.setCentralWidget(cx_form)
         cx_form.setLayout(qtw.QFormLayout())
-        heading = qtw.QLabel("Registro de Usuario")
         heading.setStyleSheet("color: rgb(5, 33, 68);\nfont: 24pt \"MS Shell Dlg 2\";")
 
         #Color the background of the window white

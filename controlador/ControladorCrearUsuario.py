@@ -6,7 +6,7 @@ from modelo.ModeloTerapeuta import ModeloTerapeuta
 import re
 from PyQt5 import QtWidgets as qtw
 from modelo.CrudUsuario import CrudUsuario
-
+import datetime
 
 class ControladorCrearUsuario():
     letters_spaces = re.compile(r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$')
@@ -17,27 +17,39 @@ class ControladorCrearUsuario():
     letters_numbers_special = re.compile(r'^[a-zA-Z0-9@#$%&_-]*$')
     # letters, numbers and spaces
     letters_numbers_spaces = re.compile(r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]*$')
-
-    def __init__(self, mode=0):
+    # Mode 0 = create therapist, 1 = create patient and 2 = edit patient
+    def __init__(self, mode=0, idTherapist = 0, idPatient = 0):
         super().__init__()
-        self.vista = VistaCrearUsuario()
-        self.vista.inputs['Tipo de usuario*'].setEnabled(False)
-        if mode == 0:
-            pass
-        else:
+        self.userId = idPatient
+        self.idTherapist = idTherapist
+        self.mode=mode
+        print(self.mode)
+        if self.mode == 0:
+            print('Creando usuario')
+            self.vista = VistaCrearUsuario()
+        elif self.mode == 1:
+            self.vista = VistaCrearUsuario()
             self.vista.inputs['Tipo de usuario*'].setChecked(False)
             self.vista.inputs['Tipo de usuario*'].setText('PACIENTE')
             self.vista.inputs['Nombre de usuario*'].setEnabled(False)
             self.vista.inputs['Contraseña*'].setEnabled(False)
             self.vista.inputs['Confirmar contraseña*'].setEnabled(False)
+        else:
+            self.vista = VistaCrearUsuario(self.mode)
+            self.vista.inputs['Tipo de usuario*'].setChecked(False)
+            self.vista.inputs['Tipo de usuario*'].setText('PACIENTE')
+            self.vista.inputs['Nombre de usuario*'].setEnabled(False)
+            self.vista.inputs['Contraseña*'].setEnabled(False)
+            self.vista.inputs['Confirmar contraseña*'].setEnabled(False)
+            self.vista.submit.setText('Actualizar')
+            self.load_user()
 
+
+        self.vista.inputs['Tipo de usuario*'].setEnabled(False)
         # access checkbox from vista
         self.clicks()
 
     def clicks(self):
-        # Set the click event for the checkbox
-        # self.vista.inputs['Tipo de usuario*'].clicked.connect(self.checkbox_clicked)
-        # Set the click event for the button to create the user
         self.vista.submit.clicked.connect(self.create_user)
 
     def create_user(self):
@@ -48,11 +60,15 @@ class ControladorCrearUsuario():
             # Create the user
             self.Consulta = CrudUsuario()
             resultado = self.Consulta.consultarUsarioPorNombre(self.vista.inputs['Nombre de usuario*'].text())
-            print(resultado)
-            if resultado:
+            print("resultado")
+            if resultado and self.mode != 2:
                 # Save the user in the database
                 self.save_user()
                 self.vista.message.setText('Usuario guardado correctamente.')
+                self.vista.message.setStyleSheet('color: green')
+            elif self.mode == 2:
+                self.save_user()
+                self.vista.message.setText('El usuario fue actualizdao correctamente.')
                 self.vista.message.setStyleSheet('color: green')
             else:
                 self.vista.message.setText('El usuario ya existe.')
@@ -120,14 +136,17 @@ class ControladorCrearUsuario():
                                        self.vista.inputs['Teléfono*'].text(), self.vista.inputs['Dirección'].text(),
                                        self.vista.inputs['Localidad'].text(),
                                        self.vista.inputs['Apellido materno'].text())
-                self.Consulta.guardarUsuario( data, 1, user)
+                self.Consulta.guardarUsuario( data, -1, user)
 
             else:
                 data = ModeloPatient(self.vista.inputs['Nombre(s)*'].text(), self.vista.inputs['Apellido paterno*'].text(),
                                      self.vista.inputs['Género*'].currentText(), self.vista.inputs['Fecha de nacimiento*'].text(),
                                      self.vista.inputs['Teléfono*'].text(), self.vista.inputs['Dirección'].text(),
                                      self.vista.inputs['Localidad'].text(), self.vista.inputs['Apellido materno'].text())
-                self.Consulta.guardarUsuario(data, 0)
+                if self.mode==1:
+                    self.Consulta.guardarUsuario(data, 0, self.idTherapist)
+                else:
+                    self.Consulta.guardarUsuario(data, self.userId)
 
             self.show_message()
 
@@ -144,3 +163,23 @@ class ControladorCrearUsuario():
         msg.setStandardButtons(qtw.QMessageBox.Ok)
         msg.exec_()
         self.vista.close()
+
+    def load_user(self):
+        try:
+            # get the user data from the database
+            self.Consulta = CrudUsuario()
+            user = self.Consulta.consultarPacientePorId(self.userId)
+            # update the user data in the window
+            self.vista.inputs['Nombre(s)*'].setText(user[0][1])
+            self.vista.inputs['Apellido paterno*'].setText(user[0][2])
+            self.vista.inputs['Género*'].setCurrentText(user[0][4])
+            self.vista.inputs['Fecha de nacimiento*'].setDate(datetime.datetime.strptime(user[0][5], '%d/%m/%Y').date())
+            self.vista.inputs['Teléfono*'].setText(user[0][12])
+            self.vista.inputs['Dirección'].setText(user[0][8])
+            self.vista.inputs['Localidad'].setText(user[0][7])
+            self.vista.inputs['Apellido materno'].setText(user[0][3])
+
+        except Exception as e:
+            print(e)
+            self.vista.message.setText('Error al actualizar el usuario.')
+            self.vista.close()

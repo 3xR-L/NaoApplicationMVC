@@ -40,9 +40,10 @@ class CrudUsuario(Conexion):
             print("Error al consultar usuario: {}".format(err))
             return False
 
-    def guardarUsuario(self, data: [ModeloTerapeuta, ModeloPatient], type: int, user: [ModeloUsuario] = None):
-        if(type == 1):
-            table = 'terapeuta'
+    def guardarUsuario(self, data: [ModeloTerapeuta, ModeloPatient], type: int, idTerapist=None, user: [ModeloUsuario] = None):
+        print('aqui')
+        if(type == -1):
+            table ='terapeuta'
             self.cursor.execute(
                 "INSERT INTO usuarios Values('{}', '{}', {})".format(user.nombreUsuario, user.password, user.tipo))
             self.cursor.execute(
@@ -55,16 +56,40 @@ class CrudUsuario(Conexion):
             )
         else:
             table = 'paciente'
-            self.cursor.execute(
-                "INSERT INTO {} (nombre, ape_paterno, ape_materno, genero, fecha_nacimiento, localidad, calle,\
-                numero_contacto) Values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(table, data.nombre,
-                data.ape_paterno, data.ape_materno, data.genero, data.fecha_nacimiento, data.localidad, data.direccion, data.numero_contacto)
-            )
+            if(type == 0):
+                table2 = 'terapeuta_has_paciente'
+                print('aqui2')
+                self.cursor.execute(
+                    "INSERT INTO {} (nombre, ape_paterno, ape_materno, genero, fecha_nacimiento, localidad, calle,\
+                    numero_contacto, Tutor_idTutor) Values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(table, data.nombre,
+                    data.ape_paterno, data.ape_materno, data.genero, data.fecha_nacimiento, data.localidad, data.direccion, data.numero_contacto,
+                    idTerapist)
+                )
+                # get the last id inserted
+                print(self.cursor.execute("SELECT idPaciente FROM paciente ORDER BY idPaciente DESC limit 1"))
+                #self.cursor.execute(
+                #    "INSERT INTO {} (terapeuta_idTerapeuta, paciente_idPaciente) Values('{}', '{}')".format(
+                        #table2, id_paciente, idTerapist)
+                #)
+            else:
+                self.cursor.execute(
+                    "UPDATE {} SET nombre ='{}', ape_paterno='{}', ape_materno='{}', genero='{}', fecha_nacimiento='{}', localidad='{}', calle='{}',\
+                    numero_contacto='{}' WHERE idPaciente = {}".format(table, data.nombre,
+                                                                                                    data.ape_paterno,
+                                                                                                    data.ape_materno,
+                                                                                                    data.genero,
+                                                                                                    data.fecha_nacimiento,
+                                                                                                    data.localidad,
+                                                                                                    data.direccion,
+                                                                                                    data.numero_contacto,
+                                                                     type)
+                )
+
         self.db.commit()
 
     def consultarPacientesAsociados(self, id: int):
         try:
-            self.cursor.execute("SELECT paciente_idPaciente FROM terapeuta_has_paciente WHERE terapeuta_idTerapeuta = '{}'".format(id))
+            self.cursor.execute("SELECT idPaciente FROM paciente WHERE Tutor_idTutor = '{}'".format(id))
             id_pacientes = self.cursor.fetchall()
             self.lista_pacientes = ()
             for idOnly in id_pacientes:
@@ -77,3 +102,19 @@ class CrudUsuario(Conexion):
         except Exception as err:
             print("Error al consultar pacientes: {}".format(err))
             return self.lista_pacientes
+
+    def eliminarPacientes(self, id: int):
+        try:
+            self.cursor.execute("DELETE FROM terapeuta_has_paciente WHERE paciente_idPaciente = '{}'".format(id))
+            self.cursor.execute("DELETE FROM sesionterapeutica WHERE Paciente_idPaciente = '{}'".format(id))
+            self.cursor.execute("DELETE FROM paciente WHERE idPaciente = '{}'".format(id))
+            self.db.commit()
+        except Exception as err:
+            print("Error al eliminar pacientes: {}".format(err))
+
+    def consultarPacientePorId(self, id: int):
+        try:
+            self.cursor.execute("SELECT * FROM paciente WHERE idPaciente = '{}'".format(id))
+            return self.cursor.fetchall()
+        except Exception as err:
+            print("Error al consultar paciente: {}".format(err))

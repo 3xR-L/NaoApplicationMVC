@@ -21,8 +21,8 @@ class VentanaBuscar(qtw.QMainWindow):
 
         self.table = qtw.QTableWidget()
         self.table.setRowCount(0)
-        self.table.setColumnCount(8)
-        self.table.setHorizontalHeaderLabels(["Nombre", "Apellido Paterno", "Apellido Materno", "Género", "Fecha de Nacimiento", "Localidad", "Dirección",\
+        self.table.setColumnCount(9)
+        self.table.setHorizontalHeaderLabels(["id", "Nombre", "Apellido Paterno", "Apellido Materno", "Género", "Fecha de Nacimiento", "Localidad", "Dirección",\
                 "No. de Contacto"])
         # enable table modification
         self.table.setEditTriggers(qtw.QAbstractItemView.NoEditTriggers)
@@ -37,6 +37,7 @@ class VentanaBuscar(qtw.QMainWindow):
         #set the width of the columns to fit the content
         self.table.horizontalHeader().setSectionResizeMode(qtw.QHeaderView.Stretch)
         self.table.setSortingEnabled(True)
+
         cx_form.layout().addRow(self.table)
 
         #add the buttons to the window
@@ -93,6 +94,6 @@ class VentanaBuscar(qtw.QMainWindow):
         cx_form.layout().addRow(group_buttons)
 
         #open window in minum size
-        self.setMinimumSize(1300, 500)
+        self.setMinimumSize(1500, 500)
 
         self.show()
