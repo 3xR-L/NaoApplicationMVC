@@ -27,6 +27,8 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
         #Ocultamos la contraseña
         self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Password)
 
+        self.ui.tbPassword.returnPressed.connect(self.ingresar)
+
     def clicks(self):
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContrasena)
         self.ui.btnOjoAbierto.clicked.connect(self.ocultarContrasena)
