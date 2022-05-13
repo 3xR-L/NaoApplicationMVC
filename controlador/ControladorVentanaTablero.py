@@ -4,8 +4,9 @@ import random
 from PyQt5.QtGui import QMovie
 from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication
 from vista.VentajaTablero import Ui_VentanaTablero
+#from controlador.ControladorVentanaEjercicio import ControladorVentanaEjercicio
 
-
+from  controlador.ControladorVentanaFelicitar import ControladorVentanaFelicitar
 from PyQt5 import QtWidgets as qtw, QtWidgets
 
 
@@ -18,16 +19,18 @@ class ControladorVentanaTablero(qtw.QMainWindow):
         self.vista = Ui_VentanaTablero()
         self.vista.setupUi(self.ventana)
         self.ventana.show()
-
         self.bandera=True
+        self.hilo = threading.Thread(target=self.numerosAleatorios)
         self.cliks()
 
 
     def cliks(self):
 
-        hilo = threading.Thread(target=self.numerosAleatorios)
-        hilo.start()
+
+
+        self.hilo.start()
         #self.vista.btnMover.clicked.connect(self.numerosAleatorios)
+        #self.felicitar()
 
 
     def mover(self):
@@ -41,6 +44,7 @@ class ControladorVentanaTablero(qtw.QMainWindow):
                     posX=20
                     posy=480
                     #Se muestran los gifts
+
 
                 else:
                  posy=posy-100
@@ -59,11 +63,15 @@ class ControladorVentanaTablero(qtw.QMainWindow):
         while (self.bandera == True):
             self.numero = random.randint(1,10)
             print(self.numero)
+
+#
             time.sleep(1)
 
             if self.numero >= 6:
                 self.mover()
     def cerrar(self):
         print("Entra a cerrar Tablero")
+    #self.hilo.raise_exception()
+        #self.hilo.join()
         self.ventana.close()
 

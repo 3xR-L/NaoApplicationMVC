@@ -68,7 +68,7 @@ class Ui_VentanaEjercicio(object):
         self.tbEjercicio.setText("")
         self.tbEjercicio.setObjectName("tbEjercicio")
         self.btnIniciar = QtWidgets.QPushButton(VentanaEjercicio)
-        self.btnIniciar.setGeometry(QtCore.QRect(130, 480, 81, 31))
+        self.btnIniciar.setGeometry(QtCore.QRect(120, 480, 81, 31))
         self.btnIniciar.setMouseTracking(False)
         self.btnIniciar.setStyleSheet("\n"
 "border-style: solid;\n"
@@ -80,7 +80,7 @@ class Ui_VentanaEjercicio(object):
 "font: 11pt \"MS Shell Dlg 2\";")
         self.btnIniciar.setObjectName("btnIniciar")
         self.btnDetener = QtWidgets.QPushButton(VentanaEjercicio)
-        self.btnDetener.setGeometry(QtCore.QRect(230, 480, 71, 31))
+        self.btnDetener.setGeometry(QtCore.QRect(220, 480, 71, 31))
         self.btnDetener.setStyleSheet("\n"
 "border-style: solid;\n"
 "border-width: 1px;\n"
@@ -92,12 +92,12 @@ class Ui_VentanaEjercicio(object):
 "font: 11pt \"MS Shell Dlg 2\";")
         self.btnDetener.setObjectName("btnDetener")
         self.label_10 = QtWidgets.QLabel(VentanaEjercicio)
-        self.label_10.setGeometry(QtCore.QRect(140, 430, 91, 21))
+        self.label_10.setGeometry(QtCore.QRect(130, 430, 91, 21))
         self.label_10.setStyleSheet("color: rgb(5, 33, 68);\n"
 "font: 12pt \"MS Shell Dlg 2\";")
         self.label_10.setObjectName("label_10")
         self.tbTiempo = QtWidgets.QLineEdit(VentanaEjercicio)
-        self.tbTiempo.setGeometry(QtCore.QRect(220, 430, 81, 31))
+        self.tbTiempo.setGeometry(QtCore.QRect(210, 430, 81, 31))
         self.tbTiempo.setStyleSheet("\n"
 "font: 10pt \"MS Shell Dlg 2\";\n"
 "color: rgb(79, 82, 85);")
