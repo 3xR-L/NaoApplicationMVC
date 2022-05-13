@@ -5,6 +5,7 @@ from modelo.ModeloPatient import ModeloPatient
 from modelo.ModeloTerapeuta import ModeloTerapeuta
 import re
 from PyQt5 import QtWidgets as qtw
+from PyQt5 import QtCore as qtc
 from modelo.CrudUsuario import CrudUsuario
 import datetime
 
@@ -18,14 +19,14 @@ class ControladorCrearUsuario():
     # letters, numbers and spaces
     letters_numbers_spaces = re.compile(r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]*$')
     # Mode 0 = create therapist, 1 = create patient and 2 = edit patient
+
+
     def __init__(self, mode=0, idTherapist = 0, idPatient = 0):
         super().__init__()
         self.userId = idPatient
         self.idTherapist = idTherapist
         self.mode=mode
-        print(self.mode)
         if self.mode == 0:
-            print('Creando usuario')
             self.vista = VistaCrearUsuario()
         elif self.mode == 1:
             self.vista = VistaCrearUsuario()
@@ -48,6 +49,16 @@ class ControladorCrearUsuario():
         self.vista.inputs['Tipo de usuario*'].setEnabled(False)
         # access checkbox from vista
         self.clicks()
+        # define if enter is pressed
+        print('here6')
+        self.vista.inputs['Nombre(s)*'].returnPressed.connect(self.create_user)
+        self.vista.inputs['Apellido paterno*'].returnPressed.connect(self.create_user)
+        self.vista.inputs['Teléfono*'].returnPressed.connect(self.create_user)
+        self.vista.inputs['Dirección'].returnPressed.connect(self.create_user)
+        self.vista.inputs['Localidad'].returnPressed.connect(self.create_user)
+        self.vista.inputs['Nombre de usuario*'].returnPressed.connect(self.create_user)
+        self.vista.inputs['Contraseña*'].returnPressed.connect(self.create_user)
+        print('here7')
 
     def clicks(self):
         self.vista.submit.clicked.connect(self.create_user)
@@ -60,16 +71,20 @@ class ControladorCrearUsuario():
             # Create the user
             self.Consulta = CrudUsuario()
             resultado = self.Consulta.consultarUsarioPorNombre(self.vista.inputs['Nombre de usuario*'].text())
-            print("resultado")
             if resultado and self.mode != 2:
                 # Save the user in the database
                 self.save_user()
                 self.vista.message.setText('Usuario guardado correctamente.')
                 self.vista.message.setStyleSheet('color: green')
+                if self.mode == 1:
+                    # emit the signal through the slot
+                    print('here')
+                    self.vista.submitted.emit(True)
             elif self.mode == 2:
                 self.save_user()
                 self.vista.message.setText('El usuario fue actualizdao correctamente.')
                 self.vista.message.setStyleSheet('color: green')
+                self.vista.submitted.emit(True)
             else:
                 self.vista.message.setText('El usuario ya existe.')
                 self.vista.message.setStyleSheet('color: red')

@@ -74,15 +74,9 @@ class CrudUsuario(Conexion):
             else:
                 self.cursor.execute(
                     "UPDATE {} SET nombre ='{}', ape_paterno='{}', ape_materno='{}', genero='{}', fecha_nacimiento='{}', localidad='{}', calle='{}',\
-                    numero_contacto='{}' WHERE idPaciente = {}".format(table, data.nombre,
-                                                                                                    data.ape_paterno,
-                                                                                                    data.ape_materno,
-                                                                                                    data.genero,
-                                                                                                    data.fecha_nacimiento,
-                                                                                                    data.localidad,
-                                                                                                    data.direccion,
-                                                                                                    data.numero_contacto,
-                                                                     type)
+                    numero_contacto='{}' WHERE idPaciente = {}".format(table, data.nombre, data.ape_paterno,
+                    data.ape_materno, data.genero, data.fecha_nacimiento, data.localidad, data.direccion,
+                    data.numero_contacto, type)
                 )
 
         self.db.commit()

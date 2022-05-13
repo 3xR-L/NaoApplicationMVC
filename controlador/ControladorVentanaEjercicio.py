@@ -30,8 +30,6 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         #Detiene el ejercicio
         self.vista.btnDetener.clicked.connect(self.detener)
 
-        print("Entra a los clicks")
-
     def abrirVentanaTablero(self):
         self.cvt = ControladorVentanaTablero()
 

@@ -5,6 +5,7 @@ import datetime
 
 
 class VistaCrearUsuario(qtw.QMainWindow):
+    submitted = qtc.pyqtSignal(bool)
 
     def __init__(self, mode=0):
         """MainWindow constructor"""
@@ -41,7 +42,7 @@ class VistaCrearUsuario(qtw.QMainWindow):
                  date=datetime.date.today(),
                  calendarPopup=True,
                  maximumDate=datetime.date.today(),
-                 displayFormat='yyyy-MM-dd'
+                 displayFormat='dd/MM/yyyy'
                  ),
             'Género*': qtw.QComboBox(),
             'Teléfono*': qtw.QLineEdit(),
