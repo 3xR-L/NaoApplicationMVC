@@ -20,10 +20,10 @@ class Ui_VentanaEjercicio(object):
         self.label_7.setStyleSheet("color: rgb(5, 33, 68);\n"
 "font: 12pt \"MS Shell Dlg 2\";")
         self.label_7.setObjectName("label_7")
-        self.tbTerapeuta = QtWidgets.QLineEdit(VentanaEjercicio)
+        self.tbTerapeuta = QtWidgets.QLabel(VentanaEjercicio)
         self.tbTerapeuta.setGeometry(QtCore.QRect(20, 120, 381, 31))
         self.tbTerapeuta.setStyleSheet("\n"
-"font: 10pt \"MS Shell Dlg 2\";\n"
+"font: 12pt \"MS Shell Dlg 2\";\n"
 "color: rgb(79, 82, 85);")
         self.tbTerapeuta.setObjectName("tbTerapeuta")
         self.label = QtWidgets.QLabel(VentanaEjercicio)
@@ -34,10 +34,11 @@ class Ui_VentanaEjercicio(object):
         self.tbPaciente = QtWidgets.QLineEdit(VentanaEjercicio)
         self.tbPaciente.setGeometry(QtCore.QRect(20, 180, 311, 31))
         self.tbPaciente.setStyleSheet("\n"
-"font: 10pt \"MS Shell Dlg 2\";\n"
+"font: 12pt \"MS Shell Dlg 2\";\n"
 "color: rgb(79, 82, 85);")
         self.tbPaciente.setText("")
         self.tbPaciente.setObjectName("tbPaciente")
+        self.tbPaciente.setEnabled(False)
         self.label_8 = QtWidgets.QLabel(VentanaEjercicio)
         self.label_8.setGeometry(QtCore.QRect(20, 160, 91, 21))
         self.label_8.setStyleSheet("color: rgb(5, 33, 68);\n"
@@ -60,12 +61,12 @@ class Ui_VentanaEjercicio(object):
         self.label_9.setStyleSheet("color: rgb(5, 33, 68);\n"
 "font: 12pt \"MS Shell Dlg 2\";")
         self.label_9.setObjectName("label_9")
-        self.tbEjercicio = QtWidgets.QLineEdit(VentanaEjercicio)
+        self.tbEjercicio = QtWidgets.QLabel(VentanaEjercicio)
         self.tbEjercicio.setGeometry(QtCore.QRect(20, 250, 381, 31))
         self.tbEjercicio.setStyleSheet("\n"
-"font: 10pt \"MS Shell Dlg 2\";\n"
+"font: 12pt \"MS Shell Dlg 2\";\n"
 "color: rgb(79, 82, 85);")
-        self.tbEjercicio.setText("")
+        self.tbEjercicio.setText("Serpientes y escaleras")
         self.tbEjercicio.setObjectName("tbEjercicio")
         self.btnIniciar = QtWidgets.QPushButton(VentanaEjercicio)
         self.btnIniciar.setGeometry(QtCore.QRect(120, 480, 81, 31))
@@ -89,12 +90,12 @@ class Ui_VentanaEjercicio(object):
 "background-color: rgb(250, 124, 39);\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius: 8px;\n"
-"font: 11pt \"MS Shell Dlg 2\";")
+"font: 10pt \"MS Shell Dlg 2\";")
         self.btnDetener.setObjectName("btnDetener")
         self.label_10 = QtWidgets.QLabel(VentanaEjercicio)
         self.label_10.setGeometry(QtCore.QRect(130, 430, 91, 21))
         self.label_10.setStyleSheet("color: rgb(5, 33, 68);\n"
-"font: 12pt \"MS Shell Dlg 2\";")
+"font: 11pt \"MS Shell Dlg 2\";")
         self.label_10.setObjectName("label_10")
         self.tbTiempo = QtWidgets.QLineEdit(VentanaEjercicio)
         self.tbTiempo.setGeometry(QtCore.QRect(210, 430, 81, 31))
@@ -125,7 +126,7 @@ class Ui_VentanaEjercicio(object):
         self.btnBuscar.setText(_translate("VentanaEjercicio", "Buscar"))
         self.label_9.setText(_translate("VentanaEjercicio", "Ejercicio"))
         self.btnIniciar.setText(_translate("VentanaEjercicio", "Iniciar"))
-        self.btnDetener.setText(_translate("VentanaEjercicio", "Detener"))
+        self.btnDetener.setText(_translate("VentanaEjercicio", "Detener/\nGuardar"))
         self.label_10.setText(_translate("VentanaEjercicio", "Tiempo"))
         self.label_11.setText(_translate("VentanaEjercicio", "Descripción del ejercicio"))
 

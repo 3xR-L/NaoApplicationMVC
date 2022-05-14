@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication
 from vista.VentajaTablero import Ui_VentanaTablero
 #from controlador.ControladorVentanaEjercicio import ControladorVentanaEjercicio
 
-from  controlador.ControladorVentanaFelicitar import ControladorVentanaFelicitar
 from PyQt5 import QtWidgets as qtw, QtWidgets
 
 

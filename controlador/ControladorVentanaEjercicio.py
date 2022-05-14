@@ -9,7 +9,8 @@ from PyQt5 import uic,QtWidgets
 from vista.VentajaEjercicio import Ui_VentanaEjercicio
 from controlador.ControladorVentanaTablero import ControladorVentanaTablero
 from controlador.ControladorVentanaBuscar import ControladorVentanaBuscar
-from controlador.ControladorVentanaFelicitar import ControladorVentanaFelicitar
+
+from modelo.CrudUsuario import CrudUsuario
 
 from PyQt5 import QtWidgets as qtw
 from modelo.ClaseCronometro import Cronometro
@@ -26,7 +27,7 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.ventana.show()
         self.t = threading.Thread(target=self.cronometro)
         self.clicks()
-
+        self.fillBlanks()
 
     def clicks(self):
         #Abre la ventana
@@ -34,6 +35,13 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.vista.btnBuscar.clicked.connect(self.abrirVentanaBuscar)
         #Detiene el ejercicio
         self.vista.btnDetener.clicked.connect(self.detener)
+
+    # Fill in the blank labels
+    def fillBlanks(self):
+        self.Consulta = CrudUsuario()
+        tName = self.Consulta.consultarTerapeutaPorId(self.idTerapeuta)
+        self.vista.tbTerapeuta.setText(tName[0][1]+" "+tName[0][2])
+
 
     def abrirVentanaTablero(self):
         self.bandera = True
@@ -47,9 +55,11 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         #Matar el hilo
         #self.t1.raise_exception()
         self.cvt.cerrar()
+
     def abrirVentanaBuscar(self):
 
         self.cvb = ControladorVentanaBuscar(self.idTerapeuta)
+        self.cvb.vista.selected.connect(self.vista.tbPaciente.setText)
 
 
 
