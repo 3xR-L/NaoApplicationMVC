@@ -6,13 +6,15 @@ from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 
 class ControladorVentanaBuscar:
-    select = qtc.pyqtSignal(bool)
     def __init__(self, idTerapeuta):
         self.vista = VentanaBuscar()
         self.idTerapeuta = idTerapeuta
         self.getPatients()
         self.clicks()
         self.vista.le_search.returnPressed.connect(self.search)
+        # define what to do when the user clicks on the table
+        self.vista.table.cellClicked.connect(self.select)
+
 
     def clicks(self):
         self.vista.btn_add.clicked.connect(self.add)
@@ -88,3 +90,8 @@ class ControladorVentanaBuscar:
             # Open the edit window
             self.vistaEditar = ControladorCrearUsuario(2, self.idTerapeuta, idPatient)
             self.vistaEditar.vista.submitted.connect(self.getPatients)
+
+    def select(self):
+
+        self.vista.selected.emit(self.vista.table.item(self.vista.table.currentRow(), 1).text()+" "+self.vista.table.item(self.vista.table.currentRow(), 2).text())
+        self.vista.close()

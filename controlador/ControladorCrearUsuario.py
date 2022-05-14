@@ -50,7 +50,6 @@ class ControladorCrearUsuario():
         # access checkbox from vista
         self.clicks()
         # define if enter is pressed
-        print('here6')
         self.vista.inputs['Nombre(s)*'].returnPressed.connect(self.create_user)
         self.vista.inputs['Apellido paterno*'].returnPressed.connect(self.create_user)
         self.vista.inputs['Teléfono*'].returnPressed.connect(self.create_user)
@@ -58,7 +57,6 @@ class ControladorCrearUsuario():
         self.vista.inputs['Localidad'].returnPressed.connect(self.create_user)
         self.vista.inputs['Nombre de usuario*'].returnPressed.connect(self.create_user)
         self.vista.inputs['Contraseña*'].returnPressed.connect(self.create_user)
-        print('here7')
 
     def clicks(self):
         self.vista.submit.clicked.connect(self.create_user)
@@ -78,7 +76,6 @@ class ControladorCrearUsuario():
                 self.vista.message.setStyleSheet('color: green')
                 if self.mode == 1:
                     # emit the signal through the slot
-                    print('here')
                     self.vista.submitted.emit(True)
             elif self.mode == 2:
                 self.save_user()

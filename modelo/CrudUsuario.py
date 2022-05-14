@@ -112,3 +112,10 @@ class CrudUsuario(Conexion):
             return self.cursor.fetchall()
         except Exception as err:
             print("Error al consultar paciente: {}".format(err))
+
+    def consultarTerapeutaPorId(self, id):
+        try:
+            self.cursor.execute("SELECT * FROM terapeuta WHERE idTerapeuta = '{}'".format(id))
+            return self.cursor.fetchall()
+        except Exception as err:
+            print("Error al consultar terapeuta: {}".format(err))
