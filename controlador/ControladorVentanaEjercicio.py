@@ -70,6 +70,12 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.Consulta = CrudUsuario()
         self.Consulta.guardarEjercicio(self.idTerapeuta, self.idPaciente, self.valores, self.vista.tbTiempo.text(),
                                        self.vista.textEditDescripcion.toPlainText())
+        # display a message box
+        msg = qtw.QMessageBox()
+        msg.setIcon(qtw.QMessageBox.Information)
+        msg.setText("Ejercicio guardado")
+        msg.setWindowTitle("Guardado")
+        msg.exec_()
 
 
     def abrirVentanaBuscar(self):
