@@ -4,73 +4,58 @@ import random
 from PyQt5.QtGui import QMovie
 from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication
 from vista.VentajaTablero import Ui_VentanaTablero
-#from controlador.ControladorVentanaEjercicio import ControladorVentanaEjercicio
 
 from PyQt5 import QtWidgets as qtw, QtWidgets
+from PyQt5 import QtCore as qtc
 
 
 class ControladorVentanaTablero(qtw.QMainWindow):
-    numero = 0
-    bandera = False
+    con = qtc.pyqtSignal(list)
     def __init__(self):
         super().__init__()
         self.ventana = QtWidgets.QMainWindow()
         self.vista = Ui_VentanaTablero()
         self.vista.setupUi(self.ventana)
         self.ventana.show()
-        self.bandera=True
+        self.bandera = True
         self.hilo = threading.Thread(target=self.numerosAleatorios)
         self.cliks()
 
 
     def cliks(self):
-
-
-
         self.hilo.start()
-        #self.vista.btnMover.clicked.connect(self.numerosAleatorios)
-        #self.felicitar()
-
 
     def mover(self):
 
-            posX=self.vista.labelRobot.x()
-            posy=self.vista.labelRobot.y()
-            print("entra a mover" + str(posX))
+        posX = self.vista.labelRobot.x()
+        posy = self.vista.labelRobot.y()
 
-            if(posX== 520):
-                if(posy==-20):
-                    posX=20
-                    posy=480
-                    #Se muestran los gifts
+        if (posX == 520):
+            if (posy == -20):
+                posX = 20
+                posy = 480
 
-
-                else:
-                 posy=posy-100
-                 posX=20
             else:
-                posX = posX + 100
+                posy = posy - 100
+                posX = 20
+        else:
+            posX = posX + 100
 
-
-            self.vista.labelRobot.move(posX, posy)
-            print("posy" + str(posy))
-            print("posx" + str(posX))
+        self.vista.labelRobot.move(posX, posy)
 
     def numerosAleatorios(self):
-        print("Entra a los numeros aleatorios")
-
+        self.sesion = []
         while (self.bandera == True):
-            self.numero = random.randint(1,10)
-            print(self.numero)
-
-#
+            self.numero = random.randint(1, 10)
+            self.sesion.append(self.numero)
             time.sleep(1)
 
             if self.numero >= 6:
                 self.mover()
-    def cerrar(self):
-        print("Entra a cerrar Tablero")
-    #self.hilo.raise_exception()
-        #self.hilo.join()
+
+        self.con.emit(self.sesion)
+        time.sleep(.5)
         self.ventana.close()
 
+    def cerrar(self):
+        self.bandera = False

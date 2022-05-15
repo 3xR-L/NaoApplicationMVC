@@ -92,6 +92,6 @@ class ControladorVentanaBuscar:
             self.vistaEditar.vista.submitted.connect(self.getPatients)
 
     def select(self):
-
-        self.vista.selected.emit(self.vista.table.item(self.vista.table.currentRow(), 1).text()+" "+self.vista.table.item(self.vista.table.currentRow(), 2).text())
+        self.vista.selected.emit([self.vista.table.item(self.vista.table.currentRow(), 0).text(), self.vista.table.item(self.vista.table.currentRow(), 1).text(),
+                                      " "+self.vista.table.item(self.vista.table.currentRow(), 2).text()])
         self.vista.close()
