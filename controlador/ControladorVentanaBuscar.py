@@ -12,8 +12,8 @@ class ControladorVentanaBuscar:
         self.getPatients()
         self.clicks()
         self.vista.le_search.returnPressed.connect(self.search)
-        # define what to do when the user clicks on the table
-        self.vista.table.cellClicked.connect(self.select)
+        # define what to do when the user double clicks on the table
+        self.vista.table.cellDoubleClicked.connect(self.select)
 
 
     def clicks(self):
