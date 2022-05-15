@@ -9,12 +9,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from vista import imgVentanaTerapeuta
 class Ui_VentanaTablero(object):
+
     def setupUi(self, VentanaTablero):
         VentanaTablero.setObjectName("VentanaTablero")
         VentanaTablero.resize(660, 617)
         VentanaTablero.setMinimumSize(QtCore.QSize(660, 617))
         VentanaTablero.setMaximumSize(QtCore.QSize(660, 617))
         VentanaTablero.setStyleSheet("background-color: rgb(255, 255, 255);")
+        # disable close button on top right corner
+        VentanaTablero.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
+
+
         self.labelTablero = QtWidgets.QLabel(VentanaTablero)
         self.labelTablero.setGeometry(QtCore.QRect(-70, -90, 801, 791))
         self.labelTablero.setStyleSheet("image: url(:/imgVentana/tablero);")

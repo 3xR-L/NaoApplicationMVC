@@ -110,6 +110,10 @@ class Ui_VentanaEjercicio(object):
 "font: 12pt \"MS Shell Dlg 2\";")
         self.label_11.setObjectName("label_11")
         self.textEditDescripcion = QtWidgets.QTextEdit(VentanaEjercicio)
+        # specify the instruction displayed in the text edit box
+        self.textEditDescripcion.setPlaceholderText("Escriba aquí la descripción del ejercicio despues de haberlo detenido"+
+                                                    " y presione el botón de Detener/Guardar nuevamente para guardar la sesión.")
+
         self.textEditDescripcion.setGeometry(QtCore.QRect(20, 310, 381, 71))
         self.textEditDescripcion.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";\n"
 "color: rgb(79, 82, 85);")

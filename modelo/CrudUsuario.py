@@ -119,3 +119,12 @@ class CrudUsuario(Conexion):
             return self.cursor.fetchall()
         except Exception as err:
             print("Error al consultar terapeuta: {}".format(err))
+
+    def guardarEjercicio(self, idTerapeuta, idPaciente, valores, tiempo, descripcion):
+        try:
+            self.cursor.execute("INSERT INTO sesionterapeutica (Terapeuta_idTrapeuta, Paciente_idPaciente, funcionCognitiva,\
+                                tiempo, comentarios) VALUES ('{}', '{}', '{}', '{}', '{}')".format(idTerapeuta, idPaciente, valores, tiempo, descripcion)
+                                )
+            self.db.commit()
+        except Exception as err:
+            print("Error al guardar ejercicio: {}".format(err))

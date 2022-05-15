@@ -4,7 +4,7 @@ from PyQt5 import QtGui as qtg
 from PyQt5 import QtCore as qtc
 
 class VentanaBuscar(qtw.QMainWindow):
-    selected = qtc.pyqtSignal(str)
+    selected = qtc.pyqtSignal(list)
     def __init__(self):
         super().__init__()
         self.setWindowModality(qtc.Qt.ApplicationModal)
