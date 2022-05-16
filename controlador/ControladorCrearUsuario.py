@@ -1,13 +1,15 @@
 # Create a new user
-from modelo.ModeloUsuario import ModeloUsuario
-from vista.VistaCrearUsuario import VistaCrearUsuario
+import datetime
+import re
+from PyQt5 import QtCore as qtc
+from PyQt5 import QtWidgets as qtw
+
+from modelo.CrudUsuario import CrudUsuario
 from modelo.ModeloPatient import ModeloPatient
 from modelo.ModeloTerapeuta import ModeloTerapeuta
-import re
-from PyQt5 import QtWidgets as qtw
-from PyQt5 import QtCore as qtc
-from modelo.CrudUsuario import CrudUsuario
-import datetime
+from modelo.ModeloUsuario import ModeloUsuario
+from vista.VistaCrearUsuario import VistaCrearUsuario
+
 
 class ControladorCrearUsuario():
     letters_spaces = re.compile(r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*$')
@@ -18,14 +20,14 @@ class ControladorCrearUsuario():
     letters_numbers_special = re.compile(r'^[a-zA-Z0-9@#$%&_-]*$')
     # letters, numbers and spaces
     letters_numbers_spaces = re.compile(r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]*$')
+
     # Mode 0 = create therapist, 1 = create patient and 2 = edit patient
 
-
-    def __init__(self, mode=0, idTherapist = 0, idPatient = 0):
+    def __init__(self, mode=0, idTherapist=0, idPatient=0):
         super().__init__()
         self.userId = idPatient
         self.idTherapist = idTherapist
-        self.mode=mode
+        self.mode = mode
         if self.mode == 0:
             self.vista = VistaCrearUsuario()
         elif self.mode == 1:
@@ -44,7 +46,6 @@ class ControladorCrearUsuario():
             self.vista.inputs['Confirmar contraseña*'].setEnabled(False)
             self.vista.submit.setText('Actualizar')
             self.load_user()
-
 
         self.vista.inputs['Tipo de usuario*'].setEnabled(False)
         # access checkbox from vista
@@ -117,7 +118,7 @@ class ControladorCrearUsuario():
             return False
 
         if self.vista.inputs['Contraseña*'].text() != self.vista.inputs['Confirmar contraseña*'].text() and \
-            self.vista.inputs['Tipo de usuario*'].isChecked():
+                self.vista.inputs['Tipo de usuario*'].isChecked():
             return False
 
         if self.numbers.match(self.vista.inputs['Teléfono*'].text()) is None or len(
@@ -148,14 +149,17 @@ class ControladorCrearUsuario():
                                        self.vista.inputs['Teléfono*'].text(), self.vista.inputs['Dirección'].text(),
                                        self.vista.inputs['Localidad'].text(),
                                        self.vista.inputs['Apellido materno'].text())
-                self.Consulta.guardarUsuario( data, -1, user)
+                self.Consulta.guardarUsuario(data, -1, user)
 
             else:
-                data = ModeloPatient(self.vista.inputs['Nombre(s)*'].text(), self.vista.inputs['Apellido paterno*'].text(),
-                                     self.vista.inputs['Género*'].currentText(), self.vista.inputs['Fecha de nacimiento*'].text(),
+                data = ModeloPatient(self.vista.inputs['Nombre(s)*'].text(),
+                                     self.vista.inputs['Apellido paterno*'].text(),
+                                     self.vista.inputs['Género*'].currentText(),
+                                     self.vista.inputs['Fecha de nacimiento*'].text(),
                                      self.vista.inputs['Teléfono*'].text(), self.vista.inputs['Dirección'].text(),
-                                     self.vista.inputs['Localidad'].text(), self.vista.inputs['Apellido materno'].text())
-                if self.mode==1:
+                                     self.vista.inputs['Localidad'].text(),
+                                     self.vista.inputs['Apellido materno'].text())
+                if self.mode == 1:
                     self.Consulta.guardarUsuario(data, 0, self.idTherapist)
                 else:
                     self.Consulta.guardarUsuario(data, self.userId)

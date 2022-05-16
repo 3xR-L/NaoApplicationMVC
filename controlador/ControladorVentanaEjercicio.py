@@ -1,19 +1,17 @@
-#
 import os
 import threading
 import time
-
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5 import uic,QtWidgets
-
-from vista.VentajaEjercicio import Ui_VentanaEjercicio
-from controlador.ControladorVentanaTablero import ControladorVentanaTablero
-from controlador.ControladorVentanaBuscar import ControladorVentanaBuscar
-
-from modelo.CrudUsuario import CrudUsuario
-
 from PyQt5 import QtWidgets as qtw
+from PyQt5 import uic, QtWidgets
+from PyQt5.QtWidgets import QMainWindow
+
+from controlador.ControladorVentanaBuscar import ControladorVentanaBuscar
+from controlador.ControladorVentanaTablero import ControladorVentanaTablero
 from modelo.ClaseCronometro import Cronometro
+from modelo.CrudUsuario import CrudUsuario
+from vista.VentajaEjercicio import Ui_VentanaEjercicio
+
+
 class ControladorVentanaEjercicio(qtw.QMainWindow):
 
     def __init__(self, id):
@@ -22,7 +20,7 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.bandera = False
         self.idTerapeuta = id
         self.idPaciente = 0
-        self.ventana= QtWidgets.QMainWindow()
+        self.ventana = QtWidgets.QMainWindow()
         self.vista = Ui_VentanaEjercicio()
         self.vista.setupUi(self.ventana)
         self.ventana.show()
@@ -32,18 +30,17 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.valores = []
 
     def clicks(self):
-        #Abre la ventana
+        # Abre la ventana
         self.vista.btnIniciar.clicked.connect(self.abrirVentanaTablero)
         self.vista.btnBuscar.clicked.connect(self.abrirVentanaBuscar)
-        #Detiene el ejercicio
+        # Detiene el ejercicio
         self.vista.btnDetener.clicked.connect(self.detener)
 
     # Fill in the blank labels
     def fillBlanks(self):
         self.Consulta = CrudUsuario()
         tName = self.Consulta.consultarTerapeutaPorId(self.idTerapeuta)
-        self.vista.tbTerapeuta.setText(tName[0][1]+" "+tName[0][2])
-
+        self.vista.tbTerapeuta.setText(tName[0][1] + " " + tName[0][2])
 
     def abrirVentanaTablero(self):
         if self.idPaciente != 0:
@@ -55,11 +52,11 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
             self.cvt.con.connect(self.guardarDatos)
 
     def detener(self):
-        #Bansdera = falso
+        # Bansdera = falso
         if self.bandera:
-            self.cvt.bandera=False
+            self.cvt.bandera = False
             self.bandera = False
-            self.guardar =True
+            self.guardar = True
             self.cvt.cerrar()
         else:
             if self.guardar:
@@ -77,15 +74,14 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         msg.setWindowTitle("Guardado")
         msg.exec_()
 
-
     def abrirVentanaBuscar(self):
         self.cvb = ControladorVentanaBuscar(self.idTerapeuta)
-        #self.cvb.vista.selected.connect(self.vista.tbPaciente.setText)
+        # self.cvb.vista.selected.connect(self.vista.tbPaciente.setText)
         # get the text
         self.cvb.vista.selected.connect(self.getText)
 
     def getText(self, text):
-        self.vista.tbPaciente.setText(text[1]+" "+text[2])
+        self.vista.tbPaciente.setText(text[1] + " " + text[2])
         self.idPaciente = int(text[0])
 
     def cronometro(self):
@@ -95,7 +91,7 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
                     if self.bandera == True:
                         for segundo in range(60):
                             if self.bandera == True:
-                                tiempo=(f'{minuto}:{segundo}')
+                                tiempo = (f'{minuto}:{segundo}')
                                 if self.bandera == True:
                                     self.vista.tbTiempo.setText(str(tiempo))
                                     time.sleep(1)
@@ -112,4 +108,4 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
         self.t.start()
 
     def guardarDatos(self, values):
-        self.valores =values
+        self.valores = values

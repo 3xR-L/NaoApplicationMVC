@@ -1,30 +1,31 @@
-#Abrimos la vemtana del Login
+# Abrimos la vemtana del Login
 from PyQt5 import QtWidgets
-
-from modelo.CrudUsuario import CrudUsuario
-from modelo.ModeloUsuario import ModeloUsuario
-from vista.VentanaLogin import Ui_VentanaLogin #importamos la clase
 from PyQt5 import QtWidgets as qtw
+
 from controlador.ControladorCrearUsuario import ControladorCrearUsuario
 from controlador.ControladorVentanaEjercicio import ControladorVentanaEjercicio
+from modelo.CrudUsuario import CrudUsuario
+from modelo.ModeloUsuario import ModeloUsuario
+from vista.VentanaLogin import Ui_VentanaLogin  # importamos la clase
 
-#Para Mostrar el Login 
-class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidgets.QMainWindow
+
+# Para Mostrar el Login
+class ControladorLogin(qtw.QMainWindow):  # Hereda para poder usar window QtWidgets.QMainWindow
 
     def __init__(self):
         super().__init__()
-        #Le asignamos la vista a un objeto para manipularlo 
+        # Le asignamos la vista a un objeto para manipularlo
         self.ui = Ui_VentanaLogin()
         self.ui.setupUi(self)
-        #self.inicializarGUI()
+        # self.inicializarGUI()
 
-        #-----EVENTOS CLICK
+        # -----EVENTOS CLICK
         self.clicks()
 
         ##ocultamos El ojito
         self.ui.btnOjoAbierto.setVisible(False)
 
-        #Ocultamos la contraseña
+        # Ocultamos la contraseña
         self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Password)
 
         self.ui.tbPassword.returnPressed.connect(self.ingresar)
@@ -34,13 +35,14 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
         self.ui.btnOjoAbierto.clicked.connect(self.ocultarContrasena)
         # Checamos que el usuario este registrado si se pulsa el boton
         self.ui.btnAceptar.clicked.connect(self.ingresar)
-        #Abrir la ventana para registrar usuarios
+        # Abrir la ventana para registrar usuarios
         self.ui.btnCrear.clicked.connect(self.registrar)
 
     def inicializarGUI(self):
         self.ui.btnOjoCerrado.clicked.connect(self.mostrarContraseña)
 
-        #Para hacer visible e invisible la contraseña
+        # Para hacer visible e invisible la contraseña
+
     def ocultarContrasena(self):
         self.ui.btnOjoAbierto.setVisible(False)
         self.ui.btnOjoCerrado.setVisible(True)
@@ -49,11 +51,11 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
     def mostrarContrasena(self):
         self.ui.btnOjoAbierto.setVisible(True)
         self.ui.btnOjoCerrado.setVisible(False)
-        self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Normal)    #Mostramos la password
+        self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Normal)  # Mostramos la password
 
     def ingresar(self):
         self.Consulta = CrudUsuario()
-        #Obtenemos los datos de la interfaz
+        # Obtenemos los datos de la interfaz
         usuario = self.ui.tbNombre.text()
         password = self.ui.tbPassword.text()
         self.ModeloUsuario = ModeloUsuario(usuario, password)
@@ -63,14 +65,14 @@ class ControladorLogin(qtw.QMainWindow): #Hereda para poder usar window QtWidget
             self.mostrarVentanaEjercicio(self.idTerapeuta)
             self.close()
         else:
-            #Mostramos un mensaje de error en una ventana emergente
+            # Mostramos un mensaje de error en una ventana emergente
             self.mostrarMensajeError()
 
     def registrar(self):
         self.vcu = ControladorCrearUsuario(0)
 
     def mostrarVentanaEjercicio(self, id):
-        self.mve= ControladorVentanaEjercicio(id)
+        self.mve = ControladorVentanaEjercicio(id)
 
     def mostrarMensajeError(self):
         self.msg = qtw.QMessageBox()

@@ -1,16 +1,17 @@
+import random
 import threading
 import time
-import random
+from PyQt5 import QtCore as qtc
+from PyQt5 import QtWidgets as qtw, QtWidgets
 from PyQt5.QtGui import QMovie
 from PyQt5.QtWidgets import QMainWindow, QLabel, QApplication
-from vista.VentajaTablero import Ui_VentanaTablero
 
-from PyQt5 import QtWidgets as qtw, QtWidgets
-from PyQt5 import QtCore as qtc
+from vista.VentajaTablero import Ui_VentanaTablero
 
 
 class ControladorVentanaTablero(qtw.QMainWindow):
     con = qtc.pyqtSignal(list)
+
     def __init__(self):
         super().__init__()
         self.ventana = QtWidgets.QMainWindow()
@@ -20,7 +21,6 @@ class ControladorVentanaTablero(qtw.QMainWindow):
         self.bandera = True
         self.hilo = threading.Thread(target=self.numerosAleatorios)
         self.cliks()
-
 
     def cliks(self):
         self.hilo.start()
