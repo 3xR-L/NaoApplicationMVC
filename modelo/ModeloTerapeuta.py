@@ -1,8 +1,15 @@
 class ModeloTerapeuta:
-
-    def __init__(self, nombre, ape_paterno, genero,
-                 fecha_nacimiento, numero_contacto, direccion='',
-                 localidad='', ape_materno=''):
+    def __init__(
+        self,
+        nombre,
+        ape_paterno,
+        genero,
+        fecha_nacimiento,
+        numero_contacto,
+        direccion="",
+        localidad="",
+        ape_materno="",
+    ):
         self.nombre = nombre
         self.ape_paterno = ape_paterno
         self.ape_materno = ape_materno
@@ -110,19 +117,53 @@ class ModeloTerapeuta:
         self.usuarios_nombreUsuario = usuarios_nombreUsuario
 
     def __str__(self):
-        return "idTerapeuta: " + str(self.idTerapeuta) + "\n" + \
-               "nombre: " + self.nombre + "\n" + \
-               "ape_paterno: " + self.ape_paterno + "\n" + \
-               "ape_materno: " + self.ape_materno + "\n" + \
-               "genero: " + self.genero + "\n" + \
-               "fecha_nacimiento: " + self.fecha_nacimiento + "\n" + \
-               "cod_postal: " + self.cod_postal + "\n" + \
-               "localidad: " + self.localidad + "\n" + \
-               "calle: " + self.calle + "\n" + \
-               "num: " + self.num + "\n" + \
-               "nacionalidad: " + self.nacionalidad + "\n" + \
-               "numero_contacto: " + self.numero_contacto + "\n" + \
-               "correo_electronico: " + self.correo_electronico + "\n" + \
-               "borradoLogico: " + str(self.borradoLogico) + "\n" + \
-               "Municipio_idMunicipio: " + str(self.Municipio_idMunicipio) + "\n" + \
-               "usuarios_nombreUsuario: " + self.usuarios_nombreUsuario + "\n"
+        return (
+            "idTerapeuta: "
+            + str(self.idTerapeuta)
+            + "\n"
+            + "nombre: "
+            + self.nombre
+            + "\n"
+            + "ape_paterno: "
+            + self.ape_paterno
+            + "\n"
+            + "ape_materno: "
+            + self.ape_materno
+            + "\n"
+            + "genero: "
+            + self.genero
+            + "\n"
+            + "fecha_nacimiento: "
+            + self.fecha_nacimiento
+            + "\n"
+            + "cod_postal: "
+            + self.cod_postal
+            + "\n"
+            + "localidad: "
+            + self.localidad
+            + "\n"
+            + "calle: "
+            + self.calle
+            + "\n"
+            + "num: "
+            + self.num
+            + "\n"
+            + "nacionalidad: "
+            + self.nacionalidad
+            + "\n"
+            + "numero_contacto: "
+            + self.numero_contacto
+            + "\n"
+            + "correo_electronico: "
+            + self.correo_electronico
+            + "\n"
+            + "borradoLogico: "
+            + str(self.borradoLogico)
+            + "\n"
+            + "Municipio_idMunicipio: "
+            + str(self.Municipio_idMunicipio)
+            + "\n"
+            + "usuarios_nombreUsuario: "
+            + self.usuarios_nombreUsuario
+            + "\n"
+        )

@@ -13,7 +13,6 @@ from vista.VentajaEjercicio import Ui_VentanaEjercicio
 
 
 class ControladorVentanaEjercicio(qtw.QMainWindow):
-
     def __init__(self, id):
         ##Originaslemte no tenpia esto
         super().__init__()
@@ -65,8 +64,13 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
 
     def guardarEjercicio(self):
         self.Consulta = CrudUsuario()
-        self.Consulta.guardarEjercicio(self.idTerapeuta, self.idPaciente, self.valores, self.vista.tbTiempo.text(),
-                                       self.vista.textEditDescripcion.toPlainText())
+        self.Consulta.guardarEjercicio(
+            self.idTerapeuta,
+            self.idPaciente,
+            self.valores,
+            self.vista.tbTiempo.text(),
+            self.vista.textEditDescripcion.toPlainText(),
+        )
         # display a message box
         msg = qtw.QMessageBox()
         msg.setIcon(qtw.QMessageBox.Information)
@@ -91,7 +95,7 @@ class ControladorVentanaEjercicio(qtw.QMainWindow):
                     if self.bandera == True:
                         for segundo in range(60):
                             if self.bandera == True:
-                                tiempo = (f'{minuto}:{segundo}')
+                                tiempo = f"{minuto}:{segundo}"
                                 if self.bandera == True:
                                     self.vista.tbTiempo.setText(str(tiempo))
                                     time.sleep(1)

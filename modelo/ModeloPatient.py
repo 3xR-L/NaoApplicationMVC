@@ -1,10 +1,15 @@
-
-
 class ModeloPatient:
-
-    def __init__(self, nombre, ape_paterno, genero,
-                 fecha_nacimiento, numero_contacto, direccion='',
-                 localidad='', ape_materno=''):
+    def __init__(
+        self,
+        nombre,
+        ape_paterno,
+        genero,
+        fecha_nacimiento,
+        numero_contacto,
+        direccion="",
+        localidad="",
+        ape_materno="",
+    ):
         self.nombre = nombre
         self.ape_paterno = ape_paterno
         self.ape_materno = ape_materno
@@ -12,7 +17,7 @@ class ModeloPatient:
         self.fecha_nacimiento = fecha_nacimiento
         self.localidad = localidad
         self.direccion = direccion
-        self.diagnostico = ''
+        self.diagnostico = ""
         self.numero_contacto = numero_contacto
         self.Tutor_idTutor = 0
 
@@ -118,10 +123,39 @@ class ModeloPatient:
         self.Municipio_idMunicipio = Municipio_idMunicipio
 
     def __str__(self):
-        return "idPaciente: " + str(self.idPaciente) + " nombre: " + self.nombre + " ape_paterno: " + \
-               self.ape_paterno + " ape_materno: " + self.ape_materno + " genero: " + self.genero + \
-               " fecha_nacimiento: " + self.fecha_nacimiento + " cod_postal: " + self.cod_postal + " localidad: " + \
-               self.localidad + " calle: " + self.calle + " num: " + self.num + " nacionalidad: " + self.nacionalidad + \
-               " diagnostico: " + self.diagnostico + " numero_contacto: " + self.numero_contacto + \
-               " correo_electronico: " + self.correo_electronico + " borradoLogico: " + str(self.borradoLogico) + \
-               " Tutor_idTutor: " + str(self.Tutor_idTutor) + " Municipio_idMunicipio: " + str(self.Municipio_idMunicipio)
+        return (
+            "idPaciente: "
+            + str(self.idPaciente)
+            + " nombre: "
+            + self.nombre
+            + " ape_paterno: "
+            + self.ape_paterno
+            + " ape_materno: "
+            + self.ape_materno
+            + " genero: "
+            + self.genero
+            + " fecha_nacimiento: "
+            + self.fecha_nacimiento
+            + " cod_postal: "
+            + self.cod_postal
+            + " localidad: "
+            + self.localidad
+            + " calle: "
+            + self.calle
+            + " num: "
+            + self.num
+            + " nacionalidad: "
+            + self.nacionalidad
+            + " diagnostico: "
+            + self.diagnostico
+            + " numero_contacto: "
+            + self.numero_contacto
+            + " correo_electronico: "
+            + self.correo_electronico
+            + " borradoLogico: "
+            + str(self.borradoLogico)
+            + " Tutor_idTutor: "
+            + str(self.Tutor_idTutor)
+            + " Municipio_idMunicipio: "
+            + str(self.Municipio_idMunicipio)
+        )

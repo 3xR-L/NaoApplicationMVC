@@ -30,8 +30,8 @@ class ControladorVentanaTablero(qtw.QMainWindow):
         posX = self.vista.labelRobot.x()
         posy = self.vista.labelRobot.y()
 
-        if (posX == 520):
-            if (posy == -20):
+        if posX == 520:
+            if posy == -20:
                 posX = 20
                 posy = 480
 
@@ -45,7 +45,7 @@ class ControladorVentanaTablero(qtw.QMainWindow):
 
     def numerosAleatorios(self):
         self.sesion = []
-        while (self.bandera == True):
+        while self.bandera == True:
             self.numero = random.randint(1, 10)
             self.sesion.append(self.numero)
             time.sleep(1)
@@ -54,7 +54,7 @@ class ControladorVentanaTablero(qtw.QMainWindow):
                 self.mover()
 
         self.con.emit(self.sesion)
-        time.sleep(.5)
+        time.sleep(0.5)
         self.ventana.close()
 
     def cerrar(self):

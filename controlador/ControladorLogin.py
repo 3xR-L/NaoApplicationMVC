@@ -10,8 +10,9 @@ from vista.VentanaLogin import Ui_VentanaLogin  # importamos la clase
 
 
 # Para Mostrar el Login
-class ControladorLogin(qtw.QMainWindow):  # Hereda para poder usar window QtWidgets.QMainWindow
-
+class ControladorLogin(
+    qtw.QMainWindow
+):  # Hereda para poder usar window QtWidgets.QMainWindow
     def __init__(self):
         super().__init__()
         # Le asignamos la vista a un objeto para manipularlo
@@ -51,7 +52,9 @@ class ControladorLogin(qtw.QMainWindow):  # Hereda para poder usar window QtWidg
     def mostrarContrasena(self):
         self.ui.btnOjoAbierto.setVisible(True)
         self.ui.btnOjoCerrado.setVisible(False)
-        self.ui.tbPassword.setEchoMode(QtWidgets.QLineEdit.Normal)  # Mostramos la password
+        self.ui.tbPassword.setEchoMode(
+            QtWidgets.QLineEdit.Normal
+        )  # Mostramos la password
 
     def ingresar(self):
         self.Consulta = CrudUsuario()
