@@ -1,7 +1,6 @@
 from conexiones.Conexion import Conexion
 
 
-
 def setup_module():
     global dbt
     try:
