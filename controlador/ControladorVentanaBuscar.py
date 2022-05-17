@@ -32,10 +32,11 @@ class ControladorVentanaBuscar:
         # Get the patients id from the database
         self.getPatients()
         for i in range(self.vista.table.rowCount()):
-            if self.vista.table.item(i, 1).text().lower().find(text.lower()) != -1 or self.vista.table.item(i,
-                                                                                                            2).text().lower().find(
-                    text.lower()) \
-                    != -1 or self.vista.table.item(i, 3).text().lower().find(text.lower()) != -1:
+            if (
+                self.vista.table.item(i, 1).text().lower().find(text.lower()) != -1
+                or self.vista.table.item(i, 2).text().lower().find(text.lower()) != -1
+                or self.vista.table.item(i, 3).text().lower().find(text.lower()) != -1
+            ):
                 pass
             else:
                 self.vista.table.hideRow(i)
@@ -92,7 +93,11 @@ class ControladorVentanaBuscar:
             self.vistaEditar.vista.submitted.connect(self.getPatients)
 
     def select(self):
-        self.vista.selected.emit([self.vista.table.item(self.vista.table.currentRow(), 0).text(),
-                                  self.vista.table.item(self.vista.table.currentRow(), 1).text(),
-                                  " " + self.vista.table.item(self.vista.table.currentRow(), 2).text()])
+        self.vista.selected.emit(
+            [
+                self.vista.table.item(self.vista.table.currentRow(), 0).text(),
+                self.vista.table.item(self.vista.table.currentRow(), 1).text(),
+                " " + self.vista.table.item(self.vista.table.currentRow(), 2).text(),
+            ]
+        )
         self.vista.close()

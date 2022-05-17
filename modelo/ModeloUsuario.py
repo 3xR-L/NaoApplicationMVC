@@ -1,5 +1,5 @@
 class ModeloUsuario:
-    def __init__(self, nombreUsuario: str, password:str, tipo:int = 1):
+    def __init__(self, nombreUsuario: str, password: str, tipo: int = 1):
         self.nombreUsuario = nombreUsuario
         self.password = password
         self.tipo = tipo
