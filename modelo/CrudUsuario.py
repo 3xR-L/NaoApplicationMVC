@@ -59,7 +59,6 @@ class CrudUsuario(Conexion):
         idTerapist=None,
         user: [ModeloUsuario] = None,
     ):
-        print("aqui")
         if type == -1:
             table = "terapeuta"
             self.cursor.execute(
